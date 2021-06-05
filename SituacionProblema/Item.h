@@ -1,5 +1,6 @@
 #pragma once
 #include<iostream>
+#include<vector>
 using namespace std;
 
 class Item
@@ -10,7 +11,8 @@ public:
 	virtual string interuactar();
 private:
 	string desc;
-	map<string, string>palabras;
+	string nombre;
+	vector<string> palabras;
 };
 
 Item::Item() {
