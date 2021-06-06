@@ -1,0 +1,6 @@
+Sala de estar
+En la humilde habitación, quizás una de las más vacías de toda la 
+casa, solo se encuentra una lámpara.
+STOP
+0
+lampara.txt

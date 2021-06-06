@@ -6,23 +6,35 @@ using namespace std;
 class Habitacion
 {
 public:
-	Habitacion(string, Item* [4], Habitacion* [4]);
+	Habitacion(string,string,bool);
+	Habitacion(string, string, bool,string);
 	Item getItem(int);
 	void setItem(int Item);
 	Item quitarItem(int);
 	string getDescripcion();
 	void setDescripcion(string);
+	void test();
 private:
+	string nombre;
 	string descripcion;
 	Item *item[4];
 	Habitacion *salidas[4];
 	bool cerrada;
+	string nombreLlave;
 };
 
-Habitacion::Habitacion(string des, Item* items_[4], Habitacion* salidas_[4]) {
+Habitacion::Habitacion(string nombre_,string des, bool cerrada_) {
+	nombre = nombre_;
 	descripcion = des;
-	*item = *items_;
-	*salidas = *salidas_;
+	cerrada = cerrada_;
+	nombreLlave = "";
+}
+
+Habitacion::Habitacion(string nombre_, string des, bool cerrada_,string nombreLlave_) {
+	nombre = nombre_;
+	descripcion = des;
+	cerrada = cerrada_;
+	nombreLlave = nombreLlave_;
 }
 
 Item Habitacion::getItem(int n) {
@@ -44,4 +56,21 @@ string Habitacion::getDescripcion() {
 void Habitacion::setDescripcion(string d) {
 
 }
+
+void Habitacion::test() {
+	cout << nombre << endl;
+	cout << descripcion << endl;
+	cout << cerrada << endl;
+	cout << nombreLlave << endl << endl;
+}
+
+/*
+txt:
+
+#nombre 1 sola linea
+#descripcion
+STOP #señal que termino la descripcion
+0 o 1 #bool cerrada   0-> false   1->true
+#lista de nombres de txt que son los items de la habitacion
+*/
 

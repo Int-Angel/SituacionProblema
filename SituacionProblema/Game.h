@@ -30,6 +30,7 @@ TODO:
 	[-] metodo crear eventos
 	- metodo crear jugador
 
+
 */
 
 class Game
@@ -50,10 +51,7 @@ private:
 
 	Personaje* personaje;
 
-	Habitacion* taller;
-	Habitacion* cocina;
-	Habitacion* recamara;
-	Habitacion* salaDeEstar;
+	Habitacion* habitacion[4];
 };
 
 Game::Game() {
@@ -98,6 +96,45 @@ void Game::crearEventos() {
 }
 
 void Game::crearHabitaciones() {
+	string habitacionTxt[4] = { "taller.txt","cocina.txt","sala.txt","recamara.txt" };
+	string linea;
+	ifstream archivo;
+
+	for (int i = 0; i < 4; i++) {
+		archivo.open(habitacionTxt[i]);
+
+		string nombre;
+		string descripcion = "";
+		bool cerrada;
+		string nombreLlave = "";
+		vector<string> itemsTxt;
+
+		getline(archivo, nombre);
+
+		while (getline(archivo, linea)) {
+			if (linea == "STOP")break;
+			descripcion += linea + "\n";
+		}
+
+		getline(archivo, linea);
+		if (linea == "1") {
+			cerrada = true;
+			getline(archivo, nombreLlave);
+		}
+		else {
+			cerrada = false;
+		}
+
+		while (getline(archivo, linea)) {
+			itemsTxt.push_back(linea);
+		}
+		archivo.close();
+		//TODO leer archivos de los items y agregar a las habitaciones
+
+		habitacion[i] = new Habitacion(nombre, descripcion, cerrada, nombreLlave);
+		//TODO agregar items
+	}
+	//TODO agregar salidas a las habitaciones
 
 }
 

@@ -1,0 +1,10 @@
+Llave
+Llave de tu cuarto
+tomar
+agarrar
+obtener
+STOP
+pickable
+deja..intento... usar la llave
+usar
+abrir

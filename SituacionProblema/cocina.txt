@@ -1,0 +1,13 @@
+Cocina
+En la cocina se encuentra una gran ventana y una mesa muy modesta.
+Sobre la mesa hay un cuchillo, una llave, una manzana y una barra 
+energética. 
+En el suelo se encuentra una cadena de metal.
+Agarra la cadena, es de tu taller, que hace ahi?
+STOP
+0
+cuchillo.txt
+llave.txt
+manzana.txt
+barraEnergetica.txt
+cadenaMetalica.txt

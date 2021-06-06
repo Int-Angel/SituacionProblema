@@ -1,0 +1,10 @@
+Pipa
+Pipa con mota
+tomar
+agarrar
+obtener
+STOP
+pickable
+*inhalar...* *exhalar...* ufff
+fumar
+usar

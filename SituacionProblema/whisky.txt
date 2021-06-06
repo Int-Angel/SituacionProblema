@@ -1,0 +1,11 @@
+Whisky
+Botella casi vacia de whisky
+tomar
+agarrar
+obtener
+STOP
+consumible
+1
+tomando whisky...
+beber
+tomar

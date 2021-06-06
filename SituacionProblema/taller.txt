@@ -1,0 +1,12 @@
+Taller
+Te encuentras en uno de los amplios salones de tu taller, en él, 
+solo se encuentra una mesa y tu caballete para pintar, del cual 
+se sostiene la pintura. Sobre la mesa se encuentra un whisky, 
+una radio y una pipa.
+STOP
+0
+pintura.txt
+mesa.txt
+whisky.txt
+radio.txt
+pipa.txt
