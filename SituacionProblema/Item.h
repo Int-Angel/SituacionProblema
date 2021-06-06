@@ -16,11 +16,10 @@ private:
 };
 
 Item::Item() {
-
 }
 string Item::getDesc() {
-
+	return desc;
 }
 string Item::interuactar() {
-
+	return "";
 }

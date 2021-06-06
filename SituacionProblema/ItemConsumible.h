@@ -8,13 +8,14 @@ public:
 	void setCantidad(int);
 private:
 	int cantidad;
+	string accion;
 };
 
 ItemConsumible::ItemConsumible(int n) {
 	cantidad = n;
 }
 string ItemConsumible::interactuar() {
-
+	return accion;
 }
 int ItemConsumible::getCantidad() {
 	return cantidad;

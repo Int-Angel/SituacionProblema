@@ -17,8 +17,8 @@ ItemStatic::ItemStatic(string estados_[5], bool estado_, ItemPickable i) {
 
 }
 string ItemStatic::getDesc() {
-
+	return getDesc();
 }
 string ItemStatic::interactuar(Item* inv[10]) {
-
+	return "TODO";
 }

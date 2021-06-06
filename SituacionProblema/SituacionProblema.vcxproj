@@ -142,6 +142,8 @@
     <ClCompile Include="SituacionProblema.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Evento.h" />
+    <ClInclude Include="Game.h" />
     <ClInclude Include="Habitacion.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemConsumible.h" />

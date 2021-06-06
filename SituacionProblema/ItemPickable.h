@@ -13,8 +13,8 @@ ItemPickable::ItemPickable(string d) {
 	accion = d;
 }
 string ItemPickable::getDesc() {
-
+	return getDesc();
 }
 string ItemPickable::interactuar() {
-
+	return accion;
 }

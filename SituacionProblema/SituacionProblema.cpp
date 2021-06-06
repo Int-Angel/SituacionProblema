@@ -1,16 +1,11 @@
 
-#include <iostream>
-#include <map>
-#include "Habitacion.h"
-#include "Personaje.h"
-#include "Item.h"
-#include "ItemStatic.h"
-#include "ItemPickable.h"
-#include "ItemConsumible.h"
-
-using namespace std;
+#include"Game.h"
 
 int main()
 {
+
+	Game game;
+	game.play();
+
 	return 0;
 }
