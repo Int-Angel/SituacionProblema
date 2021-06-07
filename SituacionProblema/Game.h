@@ -14,25 +14,6 @@ using namespace std;
 #include"ItemPickable.h"
 #include"ItemStatic.h"
 
-
-
-/*
-
-TODO:
-	- Crear archivos de texto
-		habitaciones
-		items
-		eventos
-
-	[-] clase eventos
-	- metodo crear items
-	- metodo crear habitaciones
-	[-] metodo crear eventos
-	- metodo crear jugador
-
-
-*/
-
 class Game
 {
 public:
@@ -135,11 +116,15 @@ void Game::crearHabitaciones() {
 		habitacion[i] = new Habitacion(nombre, descripcion, cerrada, nombreLlave);
 		habitacion[i]->setItems(crearItems(itemsTxt));
 	}
-	//TODO agregar salidas a las habitaciones
+	
+	habitacion[0]->setSalidas(habitacion[2], habitacion[1], NULL, NULL);
+	habitacion[1]->setSalidas(habitacion[0], NULL, NULL, NULL);
+	habitacion[2]->setSalidas(NULL, habitacion[0], NULL, habitacion[3]);
+	habitacion[3]->setSalidas(NULL, NULL, habitacion[2], NULL);
 
-	for (int i = 0; i < 4; i++) {
+	/*for (int i = 0; i < 4; i++) {
 		habitacion[i]->test();
-	}
+	}*/
 }
 
 vector<Item*> Game::crearItems(vector<string> itemsTxt) {
@@ -264,7 +249,10 @@ ItemPickable* Game::crearItemPickable(string itemTxt) {
 }
 
 void Game::crearJugador() {
-
+	string nom;
+	cout << "Ingresa tu nombre: ";
+	cin >> nom;
+	personaje = new Personaje(nom, habitacion[0]);
 }
 
 void Game::play() {

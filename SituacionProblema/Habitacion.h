@@ -14,6 +14,7 @@ public:
 	string getDescripcion();
 	void setItems(vector<Item*>);
 	void setDescripcion(string);
+	void setSalidas(Habitacion*, Habitacion*, Habitacion*, Habitacion*);
 	void test();
 private:
 	string nombre;
@@ -61,7 +62,20 @@ string Habitacion::getDescripcion() {
 void Habitacion::setDescripcion(string d) {
 
 }
+void Habitacion::setSalidas(Habitacion* norte, Habitacion* sur, Habitacion* este, Habitacion* oeste) {
 
+	*salidas[0] = *norte;
+	*salidas[1] = *este;
+	*salidas[2] = *sur;
+	*salidas[3] = *oeste;
+	/*
+	Salidas:
+	0 -> norte
+	1 -> este
+	2 -> sur
+	3 -> oeste
+	*/
+}
 void Habitacion::test() {
 	cout << nombre << endl;
 	cout << descripcion << endl;
