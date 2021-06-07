@@ -117,14 +117,14 @@ void Game::crearHabitaciones() {
 		habitacion[i]->setItems(crearItems(itemsTxt));
 	}
 	
-	habitacion[0]->setSalidas(habitacion[2], habitacion[1], NULL, NULL);
-	habitacion[1]->setSalidas(habitacion[0], NULL, NULL, NULL);
-	habitacion[2]->setSalidas(NULL, habitacion[0], NULL, habitacion[3]);
-	habitacion[3]->setSalidas(NULL, NULL, habitacion[2], NULL);
+	//habitacion[0]->setSalidas(habitacion[2], habitacion[1], NULL, NULL);
+	//habitacion[1]->setSalidas(habitacion[0], NULL, NULL, NULL);
+	//habitacion[2]->setSalidas(NULL, habitacion[0], NULL, habitacion[3]);
+	//habitacion[3]->setSalidas(NULL, NULL, habitacion[2], NULL);
 
-	/*for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < 4; i++) {
 		habitacion[i]->test();
-	}*/
+	}
 }
 
 vector<Item*> Game::crearItems(vector<string> itemsTxt) {
