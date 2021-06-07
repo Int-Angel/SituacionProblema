@@ -8,6 +8,7 @@ using namespace std;
 class Personaje
 {
 public:
+	Personaje();
 	Personaje(string,Habitacion*);
 	void Parser();
 	void setHabitacionActual(Habitacion);
@@ -20,6 +21,8 @@ private:
 	int numeroMovimientos;
 	ItemPickable *inventario[10];
 };
+
+Personaje::Personaje() { }
 
 Personaje::Personaje(string nombre_ , Habitacion* hab) {
 	nombre = nombre_;
