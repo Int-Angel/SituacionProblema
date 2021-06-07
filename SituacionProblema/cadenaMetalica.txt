@@ -1,10 +1,10 @@
+pickable
 Cadena metalica
 Cadena metalica para cerrar tu taller
 tomar
 agarrar
 obtener
 STOP
-pickable
 no sirve para nada la cadena
 usar
 golpear

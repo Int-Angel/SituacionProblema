@@ -1,10 +1,10 @@
+pickable
 Lapiz
 Lapiz del numero 2, perfecto para hacer un examen
 tomar
 agarrar
 obtener
 STOP
-pickable
 *dibujaste una carita feliz en la pared*
 usar
 rayar

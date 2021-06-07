@@ -1,8 +1,8 @@
+static
 Mesita
 Mesa vieja y desgastada de madera chiquita
 ver
 abrir
 STOP
-static
 cerrada
 abierta

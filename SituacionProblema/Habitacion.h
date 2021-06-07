@@ -12,12 +12,13 @@ public:
 	void setItem(int Item);
 	Item quitarItem(int);
 	string getDescripcion();
+	void setItems(vector<Item*>);
 	void setDescripcion(string);
 	void test();
 private:
 	string nombre;
 	string descripcion;
-	Item *item[4];
+	vector<Item*> item;
 	Habitacion *salidas[4];
 	bool cerrada;
 	string nombreLlave;
@@ -35,6 +36,10 @@ Habitacion::Habitacion(string nombre_, string des, bool cerrada_,string nombreLl
 	descripcion = des;
 	cerrada = cerrada_;
 	nombreLlave = nombreLlave_;
+}
+
+void Habitacion::setItems(vector<Item*> item_) {
+	item = item_;
 }
 
 Item Habitacion::getItem(int n) {
@@ -62,6 +67,11 @@ void Habitacion::test() {
 	cout << descripcion << endl;
 	cout << cerrada << endl;
 	cout << nombreLlave << endl << endl;
+	cout << "ITEMS: " + to_string(item.size())<< endl;
+	for (int i = 0; i < item.size(); i++) {
+		item[i]->test();
+	}
+	cout << endl << endl;
 }
 
 /*

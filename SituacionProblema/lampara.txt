@@ -1,7 +1,7 @@
+static
 Lampara
 Lampara que te regalo tu madre
 usar
 STOP
-static
 prendida
 apagada

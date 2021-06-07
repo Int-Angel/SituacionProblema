@@ -37,21 +37,23 @@ class Game
 {
 public:
 	Game();
-	void crearJuego();
-	void crearEventos();
-	void crearJugador();
-	void crearHabitaciones();
 	void play();
 
 private:
 	int nEvento;
 	vector<Evento*>evento;
-
 	int nAcciones;
-
 	Personaje* personaje;
-
 	Habitacion* habitacion[4];
+
+	void crearJuego();
+	void crearEventos();
+	void crearJugador();
+	void crearHabitaciones();
+	vector<Item*>crearItems(vector<string>);
+	ItemStatic* crearItemStatic(string);
+	ItemConsumible* crearItemConsumible(string);
+	ItemPickable* crearItemPickable(string);
 };
 
 Game::Game() {
@@ -129,13 +131,136 @@ void Game::crearHabitaciones() {
 			itemsTxt.push_back(linea);
 		}
 		archivo.close();
-		//TODO leer archivos de los items y agregar a las habitaciones
 
 		habitacion[i] = new Habitacion(nombre, descripcion, cerrada, nombreLlave);
-		//TODO agregar items
+		habitacion[i]->setItems(crearItems(itemsTxt));
 	}
 	//TODO agregar salidas a las habitaciones
 
+	for (int i = 0; i < 4; i++) {
+		habitacion[i]->test();
+	}
+}
+
+vector<Item*> Game::crearItems(vector<string> itemsTxt) {
+	vector<Item*> items;
+	string linea;
+	ifstream archivo;
+
+	for (int i = 0; i < itemsTxt.size(); i++) {
+		archivo.open(itemsTxt[i]);
+		getline(archivo, linea);
+		archivo.close();
+
+		if (linea == "static") {
+			items.push_back(crearItemStatic(itemsTxt[i]));
+		}
+		else if (linea == "consumible") {
+			items.push_back(crearItemConsumible(itemsTxt[i]));
+		}
+		else if (linea == "pickable") {
+			items.push_back(crearItemPickable(itemsTxt[i]));
+		}
+		else {
+			cout << "No se pudo identificar el item: " + itemsTxt[i] << endl;
+		}
+	}
+
+	return items;
+}
+
+ItemStatic* Game::crearItemStatic(string itemTxt) {
+	string linea;
+	ifstream archivo;
+	archivo.open(itemTxt);
+
+	string desc, nombre;
+	vector<string> palabras;
+
+	getline(archivo, linea);
+	getline(archivo, nombre);
+	getline(archivo, desc);
+
+	while (getline(archivo, linea)) {
+		if (linea == "STOP") break;
+		palabras.push_back(linea);
+	}
+
+	//////////////////////////////////////////////
+
+	string estados[2];
+	getline(archivo, estados[0]);
+	getline(archivo, estados[1]);
+
+	archivo.close();
+	return new ItemStatic(desc, nombre, palabras, estados);
+}
+
+ItemConsumible* Game::crearItemConsumible(string itemTxt) {
+	string linea;
+	ifstream archivo;
+	archivo.open(itemTxt);
+
+	string desc, nombre;
+	vector<string> palabras;
+
+	getline(archivo, linea);
+	getline(archivo, nombre);
+	getline(archivo, desc);
+
+	while (getline(archivo, linea)) {
+		if (linea == "STOP") break;
+		palabras.push_back(linea);
+	}
+
+	//////////////////////////////////////////////
+
+	int n;
+	string accion;
+	vector<string> palabras2;
+
+	getline(archivo, linea);
+	n = stoi(linea);
+	getline(archivo, accion);
+
+	while (getline(archivo, linea)) {
+		palabras2.push_back(linea);
+	}
+
+	archivo.close();
+	return new ItemConsumible(desc, nombre, palabras, n, accion, palabras2);
+}
+
+ItemPickable* Game::crearItemPickable(string itemTxt) {
+	string linea;
+	ifstream archivo;
+	archivo.open(itemTxt);
+
+	string desc, nombre;
+	vector<string> palabras;
+
+	getline(archivo, linea);
+	getline(archivo, nombre);
+	getline(archivo, desc);
+
+	while (getline(archivo, linea)) {
+		if (linea == "STOP") break;
+		palabras.push_back(linea);
+	}
+
+	//////////////////////////////////////////////
+
+	string accion;
+	vector<string> palabras2;
+
+	getline(archivo, accion);
+
+	while (getline(archivo, linea)) {
+		palabras2.push_back(linea);
+	}
+
+	archivo.close();
+	return new ItemPickable(desc, nombre, palabras, accion, palabras2);
 }
 
 void Game::crearJugador() {

@@ -1,10 +1,10 @@
+pickable
 Cuchillo
 Cuchillo de chef profesional japones marca Xiaomi
 tomar
 agarrar
 obtener
 STOP
-pickable
 *que rayos quieres hacer con el cuchillo?*
 cortar
 usar

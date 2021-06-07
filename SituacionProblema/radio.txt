@@ -1,10 +1,10 @@
+pickable
 Radio
 Radio de bolsillo
 tomar
 agarrar
 obtener
 STOP
-pickable
 Escuchando radio...
 escuchar
 usar

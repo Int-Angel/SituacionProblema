@@ -9,6 +9,7 @@ public:
 	Item(string, string, vector<string>);
 	virtual string getDesc();
 	virtual string interuactar();
+	virtual void test();
 private:
 	string desc;
 	string nombre;
@@ -25,4 +26,13 @@ string Item::getDesc() {
 }
 string Item::interuactar() {
 	return "";
+}
+void Item::test() {
+	cout << "_______________________________________" << endl;
+	cout << nombre << endl;
+	cout << desc << endl;
+	cout << "Palabras interactuar: " << endl;
+	for (int i = 0; i < palabras.size(); i++) {
+		cout << palabras[i] << endl;
+	}
 }

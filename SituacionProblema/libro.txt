@@ -1,10 +1,10 @@
+pickable
 Libro
 Libro de mobidic
 tomar
 agarrar
 obtener
 STOP
-pickable
 no tienes tiempo para leer este libro...
 abrir
 leer
