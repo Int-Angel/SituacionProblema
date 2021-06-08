@@ -69,6 +69,7 @@ void Game::crearEventos() {
 		string desc = "";
 		int n = -1;
 		string hab;
+		string nomItem;
 
 		while (getline(archivo,linea)) {
 			if (linea == "STOP") {
@@ -80,7 +81,8 @@ void Game::crearEventos() {
 			}
 			desc += linea + "\n";
 		}
-		evento.push_back(new Evento(desc, n, hab));
+		getline(archivo, nomItem);
+		evento.push_back(new Evento(desc, n, hab,nomItem));
 		archivo.close();
 		cont++;
 	}

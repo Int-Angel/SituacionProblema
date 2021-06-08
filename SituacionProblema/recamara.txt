@@ -1,7 +1,7 @@
 Recamara
 En tu sencilla recamara, solo hay dos muebles. 
-Tu cama y tu mesa. Sobre tu mesa, hay un libro, 
-un lápiz sin punta y un estuche con pinceles de varios tamaños.
+Tu cama y tu mesa. No tiene ventana y los muros estan 
+algo desgastados.
 STOP
 1
 Llave

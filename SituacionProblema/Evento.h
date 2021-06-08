@@ -5,19 +5,21 @@
 class Evento
 {
 public:
-	Evento(string,int,string);
+	Evento(string,int,string, string);
 	bool Ejecutar(int, string);
 	void test();
 private:
 	string descripcion;
 	int nAcciones;
 	string habitacion;
+	string nombreItem;
 };
 
-Evento::Evento(string desc, int n, string hab) {
+Evento::Evento(string desc, int n, string hab, string nom) {
 	descripcion = desc;
 	nAcciones = n;
 	habitacion = hab;
+	nombreItem = nom;
 }
 
 bool Evento::Ejecutar(int n, string hab) {

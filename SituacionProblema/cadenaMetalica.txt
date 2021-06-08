@@ -1,6 +1,6 @@
 pickable
 Cadena metalica
-Cadena metalica para cerrar tu taller
+Que hace la cadena metalica aqui? Agarrala y llevala contigo.
 tomar
 agarrar
 obtener
