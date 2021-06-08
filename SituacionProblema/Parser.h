@@ -43,9 +43,9 @@ Parser::Parser(Personaje* personaje, ListaPalabras& palabras) {
 	palabra1 = "";
 	palabra2 = "";
 	tipo1 = "";
-	tipo2 = "";
+tipo2 = "";
 
-	item = NULL;
+item = NULL;
 }
 
 void Parser::procesaComando(string instruccion) {
@@ -78,7 +78,6 @@ void Parser::procesaComando(string instruccion) {
 	}
 
 	if (tipo1 == "interactuar" && tipo2 == "objeto") {
-		cout << "estoy en interactuar" << endl;
 		cout << item->interactuar() << endl;
 		return;
 	}
@@ -87,7 +86,7 @@ void Parser::procesaComando(string instruccion) {
 		cout << item->getDesc() << endl;
 		return;
 	}
-	
+
 	if (tipo1 == "desplazamiento" && tipo2 == "lugar") {
 		int dir = 0;
 		if (palabra2 == "norte") dir = 0;
@@ -96,7 +95,7 @@ void Parser::procesaComando(string instruccion) {
 		if (palabra2 == "oeste") dir = 3;
 		personaje->desplazar(dir);
 		return;
-	} 
+	}
 
 	cout << msg1 << endl;
 }
@@ -106,6 +105,7 @@ void Parser::getPalabras(string str) {
 	palabra2 = "";
 	string instruccion = toLower(str);
 	istringstream ss(instruccion);
+	cout << "PALABRAS" << endl;
 	ss >> palabra1;
 	ss >> palabra2;
 	ss.ignore();
@@ -115,7 +115,7 @@ void Parser::getPalabras(string str) {
 
 bool Parser::exist(string palabra, vector<string> listaPalabras) {
 	for (string str : listaPalabras) {
-		if (toLower(str) == toLower(palabra)) 
+		if (toLower(str) == toLower(palabra))
 			return true;
 	}
 	return false;
@@ -135,52 +135,50 @@ void Parser::getSemanticValue() {
 	// Busca en los objetos que hay en la habitacion
 	for (int i = 0; i < personaje->getHabitacion()->getItems().size(); ++i) {
 		if (palabra1 == toLower(personaje->getHabitacion()->getItems()[i]->getNombre())) {
-			item = personaje->getHabitacion()->getItems()[i];
-			tipo1 = "objeto";
-		}
-
-		cout << "OBJETO" << endl;
-		cout << toLower(personaje->getHabitacion()->getItems()[i]->getNombre()) << endl;
-		if (exist(palabra1, personaje->getHabitacion()->getItems()[i]->getPalabras())) {
-			item = personaje->getHabitacion()->getItems()[i];
-			tipo1 = "interactuar";
-		}
-
-		if (palabra2 == toLower(personaje->getHabitacion()->getItems()[i]->getNombre())) {
-			item = personaje->getHabitacion()->getItems()[i];
-			tipo2 = "objeto";
+			tipo1 = "";
+			tipo2 = "";
+			return;
 		}
 
 		if (exist(palabra2, personaje->getHabitacion()->getItems()[i]->getPalabras())) {
-			item = personaje->getHabitacion()->getItems()[i];
-			tipo2 = "interactuar";
+			tipo1 = "";
+			tipo2 = "";
+			return;
+		}
+
+		if (exist(palabra1, personaje->getHabitacion()->getItems()[i]->getPalabras())) {
+			tipo1 = "interactuar";
+
+			if (palabra2 == toLower(personaje->getHabitacion()->getItems()[i]->getNombre())) {
+				item = personaje->getHabitacion()->getItems()[i];
+				tipo2 = "objeto";
+			}
 		}
 	}
 
 	// Busca en el inventario del personaje y en las palabras de interactuar de cada Item
 	for (int i = 0; i < personaje->getInventario().size(); ++i) {
 		if (palabra1 == toLower(personaje->getInventario()[i]->getNombre())) {
-			item = personaje->getInventario()[i];
-			tipo1 = "objeto";
-		}
-
-		if (exist(palabra1, personaje->getInventario()[i]->getPalabras())) {
-			item = personaje->getInventario()[i];
-			tipo1 = "interactuar";
-		}
-
-		if (palabra2 == toLower(personaje->getInventario()[i]->getNombre())) {
-			item = personaje->getInventario()[i];
-			tipo2 = "objeto";
+			tipo1 = "";
+			tipo2 = "";
+			return;
 		}
 
 		if (exist(palabra2, personaje->getInventario()[i]->getPalabras())) {
-			item = personaje->getInventario()[i];
-			tipo2 = "interactuar";
+			tipo1 = "";
+			tipo2 = "";
+			return;
+		}
+
+		if (exist(palabra1, personaje->getInventario()[i]->getPalabras())) {
+			tipo1 = "interactuar";
+
+			if (palabra2 == toLower(personaje->getInventario()[i]->getNombre())) {
+				item = personaje->getInventario()[i];
+				tipo2 = "objeto";
+			}
 		}
 	}
-
-	// Busca los desplazamientos y todos los lugares
 }
 
 string Parser::toLower(string str) {

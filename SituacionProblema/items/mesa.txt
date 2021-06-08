@@ -1,8 +1,8 @@
 static
 Mesa
 Mesa vieja y desgastada de madera
-ver
-abrir
+usa
+usar
 STOP
 cerrada
 abierta

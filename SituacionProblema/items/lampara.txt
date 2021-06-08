@@ -1,6 +1,7 @@
 static
 Lampara
 Lampara que te regalo tu madre
+usa
 usar
 STOP
 prendida
