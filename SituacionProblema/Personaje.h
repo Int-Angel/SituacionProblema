@@ -1,6 +1,7 @@
 #pragma once
 
 #include<iostream>
+#include<vector>
 #include "Habitacion.h"
 #include "ItemPickable.h"
 using namespace std;
@@ -15,11 +16,13 @@ public:
 	void addItem(ItemPickable*);
 	ItemPickable* dropItem(int);
 	void eliminarItem(int);
+	vector<ItemPickable*> getInventario();
 private:
 	string nombre;
 	Habitacion *habActual;
 	int numeroMovimientos;
-	ItemPickable *inventario[10];
+	int maxInventario;
+	vector<ItemPickable*> inventario;
 };
 
 Personaje::Personaje() { }
@@ -27,6 +30,7 @@ Personaje::Personaje() { }
 Personaje::Personaje(string nombre_ , Habitacion* hab) {
 	nombre = nombre_;
 	habActual = hab;
+	maxInventario = 3;
 }
 
 void Personaje::Parser() {
@@ -47,4 +51,8 @@ ItemPickable* Personaje::dropItem(int n) {
 
 void Personaje::eliminarItem(int n) {
 
+}
+
+vector<ItemPickable*> Personaje::getInventario() {
+	return inventario;
 }

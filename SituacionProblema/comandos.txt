@@ -1,0 +1,7 @@
+Ayuda
+help
+ayudar
+salir
+exit
+finalizar
+termina

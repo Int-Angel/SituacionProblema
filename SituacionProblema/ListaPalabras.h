@@ -4,59 +4,34 @@
 using namespace std;
 
 /*
-	Clase que contiene la lista de todas las palabras del juego
-	Estas listas funcionan como base para la clase command para conocer que palabras son correctas y cuales no
+	Clase que contiene la lista de todas las palabras globales del juego
+	Estas palabras son las listas de:
+		[0] addItem -> agregar objetos
+		[1] dropItem -> soltar los objetos
+		[2] desc -> descripcion de los items
+		[3] command -> comandos de la aplicacion
+		[4] desplazamiento -> palabras para desplazar al usuario
 */
 
 class ListaPalabras
 {
 public:
 	ListaPalabras();
-	ListaPalabras(map<string, bool>&, map<string, bool>&, map<string, bool>&, map<string, bool>&);
-	map<string, bool> getlistaAdd();
-	void setlistaAdd(map<string, bool>&);
-	map<string, bool> getListaDrop();
-	void setListaDrop(map<string, bool>&);
-	map<string, bool> getListaDesc();
-	void setListaDesc(map<string, bool>&);
-	map<string, bool> getListaCommand();
-	void setListaCommand(map<string, bool>&);
+	ListaPalabras(vector<vector<string>>&);
+	vector<vector<string>> getLista();
+	void setLista(vector<vector<string>>&);
 private:
-	map<string, bool> listaAdd;
-	map<string, bool> listaDrop;
-	map<string, bool> listaDesc;
-	map<string, bool> listaCommand;
+	vector<vector<string>> lista;
 };
 
 ListaPalabras::ListaPalabras() { }
 
-ListaPalabras::ListaPalabras(map<string, bool>& add, map<string, bool>& drop, map<string, bool>& desc, map<string, bool>& command) {
-	listaAdd = add;
-	listaDrop = drop;
-	listaDesc = desc;
-	listaCommand = command;
+ListaPalabras::ListaPalabras(vector<vector<string>>& lista) {
+	this->lista = lista;
 }
 
-map<string, bool> ListaPalabras::getlistaAdd() { return listaAdd; }
+vector<vector<string>> ListaPalabras::getLista() { return lista; }
 
-void ListaPalabras::setlistaAdd(map<string, bool>& add) {
-	listaAdd = add;
-}
-
-map<string, bool> ListaPalabras::getListaDrop() { return listaDrop; }
-
-void ListaPalabras::setListaDrop(map<string, bool>& drop) {
-	listaDrop = drop;
-}
-
-map<string, bool> ListaPalabras::getListaDesc() { return listaDesc; }
-
-void ListaPalabras::setListaDesc(map<string, bool>& desc) {
-	listaDesc = desc;
-}
-
-map<string, bool> ListaPalabras::getListaCommand() { return listaCommand; }
-
-void ListaPalabras::setListaCommand(map<string, bool>& command) {
-	listaCommand = command;
+void ListaPalabras::setLista(vector<vector<string>>& lista) {
+	this->lista = lista;
 }

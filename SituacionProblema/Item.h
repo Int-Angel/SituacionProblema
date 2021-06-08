@@ -10,6 +10,8 @@ public:
 	virtual string getDesc();
 	virtual string interuactar();
 	virtual void test();
+	string getNombre();
+	vector<string> getPalabras();
 private:
 	string desc;
 	string nombre;
@@ -21,8 +23,14 @@ Item::Item(string desc_, string nombre_, vector<string> palabras_) {
 	nombre = nombre_;
 	palabras = palabras_;
 }
+string Item::getNombre() {
+	return nombre;
+}
 string Item::getDesc() {
 	return desc;
+}
+vector<string> Item::getPalabras() {
+	return palabras;
 }
 string Item::interuactar() {
 	return "";

@@ -10,6 +10,8 @@ public:
 	Habitacion(string, string, bool,string);
 	Item getItem(int);
 	void setItem(int Item);
+	vector<Item*> getItems();
+	void setItems(vector<Item>);
 	Item quitarItem(int);
 	string getDescripcion();
 	void setItems(vector<Item*>);
@@ -49,6 +51,10 @@ Item Habitacion::getItem(int n) {
 
 void Habitacion::setItem(int Item) {
 
+}
+
+vector<Item*> Habitacion::getItems() {
+	return item; 
 }
 
 Item Habitacion::quitarItem(int n) {

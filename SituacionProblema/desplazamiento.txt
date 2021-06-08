@@ -1,0 +1,11 @@
+ir
+ve
+dirigete
+camina
+caminar
+corre
+correr
+norte
+sur
+este
+oeste
