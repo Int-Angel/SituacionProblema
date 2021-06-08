@@ -20,6 +20,7 @@ public:
 	vector<ItemPickable*> getInventario();
 	ItemPickable* itemExist(string nombre);
 	bool checkIfItemExists(string nombre);
+	void desplazar(int);
 private:
 	string nombre;
 	Habitacion *habActual;
@@ -79,4 +80,16 @@ bool Personaje::checkIfItemExists(string nombre) {
 			return true;
 	}
 	return false;
+}
+
+void Personaje::desplazar(int dir) {
+	if (habActual->getSalida(dir) != NULL)
+		habActual = habActual->getSalida(dir);
+	else
+		cout << "No existe esa habitacion " << endl;
+
+
+	cout << "El personaje se movio" << endl;
+	cout << habActual->getNombre() << endl;
+	cout << habActual->getDescripcion() << endl;
 }

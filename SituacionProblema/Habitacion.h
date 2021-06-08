@@ -18,6 +18,7 @@ public:
 	void setItems(vector<Item*>);
 	void setDescripcion(string);
 	void setSalidas(Habitacion*, Habitacion*, Habitacion*, Habitacion*);
+	Habitacion* getSalida(int n);
 	Item* itemExist(string);
 	void test();
 private:
@@ -92,6 +93,10 @@ void Habitacion::setSalidas(Habitacion* norte, Habitacion* sur, Habitacion* este
 	2 -> sur
 	3 -> oeste
 	*/
+}
+
+Habitacion* Habitacion::getSalida(int n) {
+	return salidas[n];
 }
 
 Item* Habitacion::itemExist(string nombre) {

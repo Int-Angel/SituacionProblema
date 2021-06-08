@@ -88,8 +88,13 @@ void Parser::procesaComando(string instruccion) {
 		return;
 	}
 	
-	if (tipo1 == "desplazar" && tipo2 == "lugar") {
-		//personaje.desplazar(string);
+	if (tipo1 == "desplazamiento" && tipo2 == "lugar") {
+		int dir = 0;
+		if (palabra2 == "norte") dir = 0;
+		if (palabra2 == "este") dir = 1;
+		if (palabra2 == "sur") dir = 2;
+		if (palabra2 == "oeste") dir = 3;
+		personaje->desplazar(dir);
 		return;
 	} 
 
