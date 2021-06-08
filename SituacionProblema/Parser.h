@@ -31,6 +31,7 @@ private:
 	bool exist(string, vector<string>);
 	void getSemanticValue();
 	string toLower(string);
+	void test(vector<string>);
 };
 
 Parser::Parser() {}
@@ -107,7 +108,9 @@ void Parser::getPalabras(string str) {
 }
 
 bool Parser::exist(string palabra, vector<string> listaPalabras) {
+	cout << "Imprimiendo los objetos" << endl;
 	for (string str : listaPalabras) {
+		cout << "STR: " << str << endl;
 		if (toLower(str) == toLower(palabra)) 
 			return true;
 	}
@@ -132,6 +135,9 @@ void Parser::getSemanticValue() {
 			tipo1 = "objeto";
 		}
 
+		cout << "OBJETO" << endl;
+		cout << toLower(personaje->getHabitacion()->getItems()[i]->getNombre()) << endl;
+		test(personaje->getHabitacion()->getItems()[i]->getPalabras()); 
 		if (exist(palabra1, personaje->getHabitacion()->getItems()[i]->getPalabras())) {
 			item = personaje->getHabitacion()->getItems()[i];
 			tipo1 = "interactuar";
@@ -180,4 +186,11 @@ string Parser::toLower(string str) {
 		res += tolower(c);
 	}
 	return res;
+}
+
+void Parser::test(vector<string> str) {
+	cout << "IMPRIMIENDO LISTA" << endl;
+	for (string s : str) {
+		cout << s << endl;
+	}
 }
