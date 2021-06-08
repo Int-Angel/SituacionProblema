@@ -5,7 +5,3 @@ camina
 caminar
 corre
 correr
-norte
-sur
-este
-oeste

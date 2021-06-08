@@ -18,7 +18,7 @@ ItemStatic::ItemStatic(string desc_, string nombre_, vector<string> palabras_,st
 	estados[1] = estados_[1];
 }
 string ItemStatic::getDesc() {
-	return getDesc();
+	return Item::getDesc();
 }
 string ItemStatic::interactuar(Item* inv[10]) {
 	return estados[estado];

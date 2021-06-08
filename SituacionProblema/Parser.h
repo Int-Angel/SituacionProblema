@@ -2,6 +2,7 @@
 #include <vector>
 #include <string>
 #include <sstream>
+#include <iostream>
 #include "Personaje.h"
 #include "ListaPalabras.h"
 #include "Habitacion.h"
@@ -10,138 +11,173 @@ using namespace std;
 // Necesito tambien a todas las habitaciones
 
 // Mensajes del Parser
-const char* msg1 = "Todas las instrucciones deben tener menos de 3 palabras";
-const char* msg2 = "Solo los comandos son instrucciones de una sola palabra. Verifique que la instruccion tecleada sea un comando";
-const char* msg3 = "Revisa denuevo las palabras escritas. Al menos una palabra no es admitida por el juego";
+const char* msg1 = "No comprendo la instruccion. Verifique que las palabras hayan sido escritas corretamente y que el orden de ellas sea el adecuado";
+const char* msg2 = "No comprendo la instruccion. Verifique que la instruccion tecleada sea un comando";
 
 class Parser
 {
 public:
-	Parser(Personaje&, ListaPalabras&, Habitacion*);
-
-	// El metodo procesa Comando se encarga de realizar toda la interaccion con el comando
+	Parser();
+	Parser(Personaje*, ListaPalabras&);
 	void procesaComando(string);
 private:
-	vector<string> getPalabras(string);
-	bool exist(string, vector<string>);
-	Personaje personaje;
+	Personaje* personaje;
 	ListaPalabras palabras;
-	Habitacion* habitaciones;
+	string palabra1, palabra2;
+	string tipo1, tipo2;
+	Item* item;
+
+	void getPalabras(string);
+	bool exist(string, vector<string>);
+	void getSemanticValue();
+	string toLower(string);
 };
 
-Parser::Parser(Personaje& personaje, ListaPalabras& palabras, Habitacion* habitaciones) {
+Parser::Parser() {}
+
+Parser::Parser(Personaje* personaje, ListaPalabras& palabras) {
 	this->personaje = personaje;
 	this->palabras = palabras;
-	this->habitaciones = habitaciones;
+
+	palabra1 = "";
+	palabra2 = "";
+	tipo1 = "";
+	tipo2 = "";
+
+	item = NULL;
 }
 
 void Parser::procesaComando(string instruccion) {
-	// 1. Descomponemos el arreglo y verificamos que sea de la dimension correcta
-	vector<string> str = getPalabras(instruccion);
+	// 1. Descomponemos el string con las instrucciones
+	getPalabras(instruccion);
+	getSemanticValue();
 
-	// Si size de str es 1, es un comando de sistema
-	if (str.size() == 1) {
-		// Buscamos en los comandos de sistema
-		if (exist(str[0], palabras.getLista()[3])) {
-			// Ejecutar el comando
-
-		}
-		else {
-			cout << msg2 << endl;
-		}
-		return;
-	} 
-
-	// Si size de str es 2, es un comando de dos palabras
-	if (str.size() == 2) {
-		bool primer = false, segunda = false;
-
-		// 2. Buscar que existan las palabras en la base de datos, tanto str[0] como str[1]
-		for (int i = 0; i < palabras.getLista().size(); ++i) {
-			if (exist(str[0], palabras.getLista()[i]))
-				primer = true;
-			if (exist(str[1], palabras.getLista()[i]))
-				segunda = true;
-		}
-
-		// Busca tambien en todos los objetos que existen en el mundo
-		for (int i = 0; i < 4; ++i) {
-			for (int j = 0; j < habitaciones[i].getItems().size(); ++i) {
-				if (str[0] == habitaciones[i].getItems()[j]->getNombre())
-					primer = true;
-				if (exist(str[0],habitaciones[i].getItems()[j]->getPalabras()))
-					primer = true;
-				if (str[1] == habitaciones[i].getItems()[j]->getNombre())
-					segunda = true;
-				if (exist(str[1], habitaciones[i].getItems()[j]->getPalabras()))
-					segunda = true;
-			}
-		}
-
-		// Busca en el inventario del personaje y en las palabras de interactuar de cada Item
-		for (int i = 0; i < personaje.getInventario().size(); ++i) {
-			if (str[0] == personaje.getInventario()[i]->getNombre())
-				primer = true;
-			if (exist(str[0], personaje.getInventario()[i]->getPalabras()))
-				primer = true;
-			if (str[1] == personaje.getInventario()[i]->getNombre())
-				segunda = true;
-			if (exist(str[1], personaje.getInventario()[i]->getPalabras()))
-				segunda = true;
-		}
-
-		if (!(primer && segunda)) {
-			cout << msg3 << endl;
+	cout << "TIPOS" << endl;
+	cout << "Tipo 1: " << tipo1 << endl;
+	cout << "Tipo 2: " << tipo2 << endl;
+	// Si la instruccion es de una palabra
+	if (palabra2 == "") {
+		if (tipo1 == "comando")
+			//ejecutaComando();
 			return;
-		}
-
-		// Revisa la  forma semantica de la oracion
-
-		// 4. 
-		// Si str[1] es una palabra de desplazamiento
-		//		Si str[0] es una palabra de ir a algun lugar como desplazar, ir, dirigete, etc:
-		//			Ejecuta el desplazamiento
-		//		Sino
-		//			Retorna que la forma en la que esta escrito el comando es incorrecta
-		// Si str[1] es una palabra objeto
-		//		Si el objeto se encuentra en la habitacio o en el inventario del usuario:
-		//			Si str[0] es una palabra de descripcion:
-		//				Ejecuta objeto->getDesc()
-		//			Si str[0] es una palabra de tomar:
-		//				Si str[1] es un objeto pickable:
-		//					Ejecuta personaje->addItem()
-		//				Sino 
-		//					Retorna que ese objeto no se puede tomar
-		//			Si str[0] es una palabre de soltar:
-		//				Si str[1] es un objeto pickable:
-		//					Ejecuta personaje->dropItem()
-		//				Sino
-		//					Retorna que eses objeto no se puede soltar
-		//			Si str[0] es una palabra de interactuar:
-		//				Ejecuta personaje->Interactuar
-		//		Sino
-		//			Retorna que no existe el objeto en la habitacion o en el inventario
-
+		else
+			cout << msg2 << endl;
 		return;
 	}
 
+	// Si la instruccion es de dos palabras
+	if (tipo1 == "agregar" && tipo2 == "objeto") {
+		//personaje.addItem(item);
+		return;
+	}
+
+	if (tipo1 == "soltar" && tipo2 == "objeto") {
+		//personaje.dropItem(item);
+		return;
+	}
+
+	if (tipo1 == "interactuar" && tipo2 == "objeto") {
+		item->interuactar();
+		return;
+	}
+
+	if (tipo1 == "descripcion" && tipo2 == "objeto") {
+		cout << item->getDesc() << endl;
+		return;
+	}
+	
+	if (tipo1 == "desplazar" && tipo2 == "lugar") {
+		//personaje.desplazar(string);
+		return;
+	} 
+
 	cout << msg1 << endl;
-	return;
 }
 
-// Metodo que se encarga de separar las palabras y devolverlas ya separadas
-vector<string> Parser::getPalabras(string instruccion) {
-	string palabra;
-	vector<string> palabras;
-	stringstream ss(instruccion);
-	while (ss >> palabra) palabras.push_back(palabra);
-	return palabras;
+void Parser::getPalabras(string str) {
+	palabra1 = "";
+	palabra2 = "";
+	string instruccion = toLower(str);
+	istringstream ss(instruccion);
+	ss >> palabra1;
+	ss >> palabra2;
+	ss.ignore();
+	cout << palabra1 << endl;
+	cout << palabra2 << endl;
 }
 
 bool Parser::exist(string palabra, vector<string> listaPalabras) {
 	for (string str : listaPalabras) {
-		if (str == palabra)
+		if (toLower(str) == toLower(palabra)) 
 			return true;
 	}
 	return false;
+}
+
+void Parser::getSemanticValue() {
+	tipo1 = "";
+	tipo2 = "";
+	// Busca en todos los comandos del juego
+	for (int i = 0; i < palabras.getLista().size(); ++i) {
+		if (exist(palabra1, palabras.getLista()[i]))
+			tipo1 = palabras.getTipos()[i];
+		if (exist(palabra2, palabras.getLista()[i]))
+			tipo2 = palabras.getTipos()[i];
+	}
+
+	// Busca en los objetos que hay en la habitacion
+	for (int i = 0; i < personaje->getHabitacion()->getItems().size(); ++i) {
+		if (palabra1 == toLower(personaje->getHabitacion()->getItems()[i]->getNombre())) {
+			item = personaje->getHabitacion()->getItems()[i];
+			tipo1 = "objeto";
+		}
+
+		if (exist(palabra1, personaje->getHabitacion()->getItems()[i]->getPalabras())) {
+			item = personaje->getHabitacion()->getItems()[i];
+			tipo1 = "interactuar";
+		}
+
+		if (palabra2 == toLower(personaje->getHabitacion()->getItems()[i]->getNombre())) {
+			item = personaje->getHabitacion()->getItems()[i];
+			tipo2 = "objeto";
+		}
+
+		if (exist(palabra2, personaje->getHabitacion()->getItems()[i]->getPalabras())) {
+			item = personaje->getHabitacion()->getItems()[i];
+			tipo2 = "interactuar";
+		}
+	}
+
+	// Busca en el inventario del personaje y en las palabras de interactuar de cada Item
+	for (int i = 0; i < personaje->getInventario().size(); ++i) {
+		if (palabra1 == toLower(personaje->getInventario()[i]->getNombre())) {
+			item = personaje->getInventario()[i];
+			tipo1 = "objeto";
+		}
+
+		if (exist(palabra1, personaje->getInventario()[i]->getPalabras())) {
+			item = personaje->getInventario()[i];
+			tipo1 = "interactuar";
+		}
+
+		if (palabra2 == toLower(personaje->getInventario()[i]->getNombre())) {
+			item = personaje->getInventario()[i];
+			tipo2 = "objeto";
+		}
+
+		if (exist(palabra2, personaje->getInventario()[i]->getPalabras())) {
+			item = personaje->getInventario()[i];
+			tipo2 = "interactuar";
+		}
+	}
+
+	// Busca los desplazamientos y todos los lugares
+}
+
+string Parser::toLower(string str) {
+	string res;
+	for (char c : str) {
+		res += tolower(c);
+	}
+	return res;
 }

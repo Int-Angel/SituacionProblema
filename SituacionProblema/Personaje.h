@@ -12,11 +12,13 @@ public:
 	Personaje();
 	Personaje(string,Habitacion*);
 	void Parser();
+	Habitacion* getHabitacion();
 	void setHabitacionActual(Habitacion);
 	void addItem(ItemPickable*);
 	ItemPickable* dropItem(int);
 	void eliminarItem(int);
 	vector<ItemPickable*> getInventario();
+	ItemPickable* itemExist(string nombre);
 private:
 	string nombre;
 	Habitacion *habActual;
@@ -37,6 +39,10 @@ void Personaje::Parser() {
 
 }
 
+Habitacion* Personaje::getHabitacion() {
+	return habActual;
+}
+
 void Personaje::setHabitacionActual(Habitacion hab) {
 
 }
@@ -55,4 +61,12 @@ void Personaje::eliminarItem(int n) {
 
 vector<ItemPickable*> Personaje::getInventario() {
 	return inventario;
+}
+
+ItemPickable* Personaje::itemExist(string nombre) {
+	for (int i = 0; i < inventario.size(); ++i) {
+		if (nombre == inventario[i]->getNombre())
+			return inventario[i];
+	}
+	return NULL;
 }

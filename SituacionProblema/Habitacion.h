@@ -17,6 +17,7 @@ public:
 	void setItems(vector<Item*>);
 	void setDescripcion(string);
 	void setSalidas(Habitacion*, Habitacion*, Habitacion*, Habitacion*);
+	Item* itemExist(string);
 	void test();
 private:
 	string nombre;
@@ -82,6 +83,15 @@ void Habitacion::setSalidas(Habitacion* norte, Habitacion* sur, Habitacion* este
 	3 -> oeste
 	*/
 }
+
+Item* Habitacion::itemExist(string nombre) {
+	for (int i = 0; i < item.size(); ++i) {
+		if (nombre == item[i]->getNombre())
+			return item[i];
+	}
+	return NULL;
+}
+
 void Habitacion::test() {
 	cout << nombre << endl;
 	cout << descripcion << endl;

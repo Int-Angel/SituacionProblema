@@ -18,7 +18,7 @@ ItemPickable::ItemPickable(string desc_, string nombre_, vector<string> palabras
 	inventario = false;
 }
 string ItemPickable::getDesc() {
-	return getDesc();
+	return Item::getDesc();
 }
 string ItemPickable::interactuar() {
 	return inventario ? accion : "Agregado al inventario";

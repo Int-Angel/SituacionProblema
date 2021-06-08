@@ -13,6 +13,8 @@ using namespace std;
 #include"ItemConsumible.h"
 #include"ItemPickable.h"
 #include"ItemStatic.h"
+#include"Parser.h"
+#include"ListaPalabras.h"
 
 class Game
 {
@@ -26,11 +28,14 @@ private:
 	int nAcciones;
 	Personaje* personaje;
 	Habitacion* habitacion[4];
+	ListaPalabras palabras;
+	Parser parser;
 
 	void crearJuego();
 	void crearEventos();
 	void crearJugador();
 	void crearHabitaciones();
+	void crearListaPalabras();
 	vector<Item*>crearItems(vector<string>);
 	ItemStatic* crearItemStatic(string);
 	ItemConsumible* crearItemConsumible(string);
@@ -46,7 +51,10 @@ Game::Game() {
 void Game::crearJuego() {
 	crearEventos();
 	crearHabitaciones();
+	crearListaPalabras();
 	crearJugador();
+
+	parser = Parser(personaje, palabras);
 }
 
 void Game::crearEventos() {
@@ -122,9 +130,9 @@ void Game::crearHabitaciones() {
 	habitacion[2]->setSalidas(NULL, habitacion[0], NULL, habitacion[3]);
 	habitacion[3]->setSalidas(NULL, NULL, habitacion[2], NULL);
 
-	/*for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < 4; i++) {
 		habitacion[i]->test();
-	}*/
+	}
 }
 
 vector<Item*> Game::crearItems(vector<string> itemsTxt) {
@@ -252,10 +260,35 @@ void Game::crearJugador() {
 	string nom;
 	cout << "Ingresa tu nombre: ";
 	cin >> nom;
+	cin.ignore();
 	personaje = new Personaje(nom, habitacion[0]);
 }
 
-void Game::play() {
+void Game::crearListaPalabras() {
+	
+	vector<string> instruccionesTxt{ "agregar.txt","comandos.txt","desc.txt","desplazamiento.txt", "lugar.txt", "soltar.txt" };
+	vector<vector<string>> instrucciones(instruccionesTxt.size());
+	string linea;
+	ifstream archivo;
 
+	for (int i = 0; i < instruccionesTxt.size(); i++) {
+		archivo.open("instrucciones/"+instruccionesTxt[i]);
+		while (getline(archivo, linea)) {
+			instrucciones[i].push_back(linea);
+		}
+		archivo.close();
+	}
+	palabras.setLista(instrucciones);
+	palabras.setTipos(vector<string>{"agregar", "comandos", "descripcion", "desplazamiento", "lugar", "soltar" });
+	// palabras.test();
+}
+
+void Game::play() {
+	string instruccion;
+
+	while (true) {
+		getline(cin, instruccion);
+		parser.procesaComando(instruccion);
+	}
 }
 

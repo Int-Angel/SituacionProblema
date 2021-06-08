@@ -1,6 +1,7 @@
-Ayuda
-help
+ayuda
 ayudar
+help
+helpme
 salir
 exit
 finalizar
