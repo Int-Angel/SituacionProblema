@@ -1,33 +1,28 @@
 #pragma once
-#include"Personaje.h"
+
+
+
 class Evento
 {
 public:
-	Evento(string,int,string, string);
-	bool Ejecutar(int, Personaje*);
+	Evento(string,int,string);
+	bool Ejecutar(int, string);
 	void test();
 private:
 	string descripcion;
 	int nAcciones;
 	string habitacion;
-	string nombreItem;
 };
 
-Evento::Evento(string desc, int n, string hab, string nom) {
+Evento::Evento(string desc, int n, string hab) {
 	descripcion = desc;
 	nAcciones = n;
 	habitacion = hab;
-	nombreItem = nom;
 }
 
-bool Evento::Ejecutar(int n, Personaje *personaje) {
-	if (n >= nAcciones && personaje->getHabitacion()->getNombre() == habitacion) {
-		if (nombreItem == "none" || personaje->checkIfItemExists(nombreItem)) {
-			cout << descripcion << endl;
-			return true;
-		}
-	}
-	return false;
+bool Evento::Ejecutar(int n, string hab) {
+	//TODO
+	return true;
 }
 
 void Evento::test() {

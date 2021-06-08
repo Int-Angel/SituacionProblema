@@ -1,11 +1,12 @@
 #pragma once
-#include "Item.h"
+#include "ItemPickable.h"
 class ItemStatic: public Item
 {
 public:
 	ItemStatic(string, string, vector<string>,string[2]);
 	string getDesc();
 	string interactuar(Item*[10]);
+	string interactuar() override;
 	void test()override;
 private:
 	int estado;
@@ -22,6 +23,10 @@ string ItemStatic::getDesc() {
 }
 string ItemStatic::interactuar(Item* inv[10]) {
 	return estados[estado];
+}
+
+string ItemStatic::interactuar() {
+	return estados[0];
 }
 
 void ItemStatic::test() {

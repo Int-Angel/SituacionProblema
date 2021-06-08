@@ -1,5 +1,4 @@
 #pragma once
-#include"Item.h"
 class ItemConsumible: public Item
 {
 public:
@@ -21,7 +20,8 @@ ItemConsumible::ItemConsumible(string desc_, string nombre_, vector<string> pala
 }
 
 string ItemConsumible::interactuar() {
-	return inventario ? accion : "Agregado al inventario";
+	//return inventario ? accion : "Agregado al inventario";
+	return accion;
 }
 
 int ItemConsumible::getCantidad() {
@@ -36,7 +36,6 @@ void ItemConsumible::test() {
 	Item::test();
 	cout << "Cantidad: " << cantidad << endl;
 	cout << "Accion: " + accion << endl;
-	cout << "Palabras accion: " << endl;
 	cout << "_______________________________________" << endl;
 }
 
@@ -49,5 +48,4 @@ consumible
 STOP
 cantidad
 accion
-#lista palabras para la accion
 */

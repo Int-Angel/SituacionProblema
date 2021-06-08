@@ -1,10 +1,11 @@
 pickable
 Radio
 Radio de bolsillo
-tomar
-agarrar
-obtener
+usar
+usa
+escuchar
+escucha
+interactuar
+interactua
 STOP
 Escuchando radio...
-escuchar
-usar

@@ -5,5 +5,4 @@ metalica que cayo fuertemente al piso de ceramica.
 Parece que el sonido proviene de la cocina.
 STOP
 3
-Taller
-none 
+Taller 

@@ -78,7 +78,8 @@ void Parser::procesaComando(string instruccion) {
 	}
 
 	if (tipo1 == "interactuar" && tipo2 == "objeto") {
-		item->interuactar();
+		cout << "estoy en interactuar" << endl;
+		cout << item->interactuar() << endl;
 		return;
 	}
 
@@ -108,9 +109,7 @@ void Parser::getPalabras(string str) {
 }
 
 bool Parser::exist(string palabra, vector<string> listaPalabras) {
-	cout << "Imprimiendo los objetos" << endl;
 	for (string str : listaPalabras) {
-		cout << "STR: " << str << endl;
 		if (toLower(str) == toLower(palabra)) 
 			return true;
 	}
@@ -137,7 +136,6 @@ void Parser::getSemanticValue() {
 
 		cout << "OBJETO" << endl;
 		cout << toLower(personaje->getHabitacion()->getItems()[i]->getNombre()) << endl;
-		test(personaje->getHabitacion()->getItems()[i]->getPalabras()); 
 		if (exist(palabra1, personaje->getHabitacion()->getItems()[i]->getPalabras())) {
 			item = personaje->getHabitacion()->getItems()[i];
 			tipo1 = "interactuar";

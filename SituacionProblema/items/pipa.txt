@@ -1,10 +1,9 @@
 pickable
 Pipa
 Pipa con mota
-tomar
-agarrar
-obtener
+usar
+usa
+fumar
+fuma
 STOP
 *inhalar...* *exhalar...* ufff
-fumar
-usar

@@ -1,12 +1,13 @@
 consumible
 Manzana
 Manzana roja con limonsito, esta buenasa
-tomar
-agarrar
-obtener
+comer
+come 
+degustar
+degusta
+disfrutar
+consumir
+consume
 STOP
 1
 QUE RICA MANZANA, QUIERO OTRAAAA
-comer
-degustar
-disfrutar

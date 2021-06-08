@@ -69,7 +69,6 @@ void Game::crearEventos() {
 		string desc = "";
 		int n = -1;
 		string hab;
-		string nomItem;
 
 		while (getline(archivo,linea)) {
 			if (linea == "STOP") {
@@ -81,8 +80,7 @@ void Game::crearEventos() {
 			}
 			desc += linea + "\n";
 		}
-		getline(archivo, nomItem);
-		evento.push_back(new Evento(desc, n, hab,nomItem));
+		evento.push_back(new Evento(desc, n, hab));
 		archivo.close();
 		cont++;
 	}
@@ -143,18 +141,18 @@ vector<Item*> Game::crearItems(vector<string> itemsTxt) {
 	ifstream archivo;
 
 	for (int i = 0; i < itemsTxt.size(); i++) {
-		archivo.open(itemsTxt[i]);
+		archivo.open("items/"+itemsTxt[i]);
 		getline(archivo, linea);
 		archivo.close();
 
 		if (linea == "static") {
-			items.push_back(crearItemStatic(itemsTxt[i]));
+			items.push_back(crearItemStatic("items/"+itemsTxt[i]));
 		}
 		else if (linea == "consumible") {
-			items.push_back(crearItemConsumible(itemsTxt[i]));
+			items.push_back(crearItemConsumible("items/"+itemsTxt[i]));
 		}
 		else if (linea == "pickable") {
-			items.push_back(crearItemPickable(itemsTxt[i]));
+			items.push_back(crearItemPickable("items/"+itemsTxt[i]));
 		}
 		else {
 			cout << "No se pudo identificar el item: " + itemsTxt[i] << endl;
@@ -218,12 +216,8 @@ ItemConsumible* Game::crearItemConsumible(string itemTxt) {
 	n = stoi(linea);
 	getline(archivo, accion);
 
-	while (getline(archivo, linea)) {
-		palabras2.push_back(linea);
-	}
-
 	archivo.close();
-	return new ItemConsumible(desc, nombre, palabras2, n, accion);
+	return new ItemConsumible(desc, nombre, palabras, n, accion);
 }
 
 ItemPickable* Game::crearItemPickable(string itemTxt) {
@@ -246,16 +240,10 @@ ItemPickable* Game::crearItemPickable(string itemTxt) {
 	//////////////////////////////////////////////
 
 	string accion;
-	vector<string> palabras2;
-
 	getline(archivo, accion);
 
-	while (getline(archivo, linea)) {
-		palabras2.push_back(linea);
-	}
-
 	archivo.close();
-	return new ItemPickable(desc, nombre, palabras2, accion);
+	return new ItemPickable(desc, nombre, palabras, accion);
 }
 
 void Game::crearJugador() {
@@ -287,7 +275,7 @@ void Game::crearListaPalabras() {
 
 void Game::play() {
 	string instruccion;
-	//personaje->getHabitacion()->getDescripcion();
+
 	while (true) {
 		getline(cin, instruccion);
 		parser.procesaComando(instruccion);

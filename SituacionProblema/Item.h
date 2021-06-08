@@ -8,7 +8,7 @@ class Item
 public:
 	Item(string, string, vector<string>);
 	virtual string getDesc();
-	virtual string interuactar();
+	virtual string interactuar();
 	virtual void test();
 	string getNombre();
 	vector<string> getPalabras();
@@ -32,7 +32,7 @@ string Item::getDesc() {
 vector<string> Item::getPalabras() {
 	return palabras;
 }
-string Item::interuactar() {
+string Item::interactuar() {
 	return "";
 }
 void Item::test() {

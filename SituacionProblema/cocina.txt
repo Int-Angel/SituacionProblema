@@ -1,7 +1,9 @@
 Cocina
 En la cocina se encuentra una gran ventana y una mesa muy modesta.
-Es un cuarto muy oscuro a comparacion de los demas, sueles pasar
-muy poco tiempo en esta habitacion.
+Sobre la mesa hay un cuchillo, una llave, una manzana y una barra 
+energética. 
+En el suelo se encuentra una cadena de metal.
+Agarra la cadena, es de tu taller, que hace ahi?
 STOP
 0
 cuchillo.txt

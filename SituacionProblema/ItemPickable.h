@@ -1,11 +1,10 @@
 #pragma once
-#include"Item.h"
 class ItemPickable:public Item
 {
 public:
 	ItemPickable(string, string, vector<string>,string);
 	string getDesc();
-	virtual string interactuar();
+	string interactuar() override;
 	void test()override;
 private:
 	bool inventario;
@@ -20,13 +19,14 @@ string ItemPickable::getDesc() {
 	return Item::getDesc();
 }
 string ItemPickable::interactuar() {
-	return inventario ? accion : "Agregado al inventario";
+	//return inventario ? accion : "Agregado al inventario";
+	cout << "Accion " + accion << endl;
+	return accion;
 }
 
 void ItemPickable::test() {
 	Item::test();
 	cout << "Accion: " + accion << endl;
-	cout << "Palabras accion: " << endl;
 	cout << "_______________________________________" << endl;
 }
 
@@ -38,5 +38,4 @@ pickable
 #lista de palabras
 STOP
 accion
-#lista palabras para la accion
 */
