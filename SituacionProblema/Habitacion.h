@@ -14,8 +14,8 @@ public:
 	void setItems(vector<Item>);
 	Item quitarItem(int);
 	string getDescripcion();
+	string getNombre();
 	void setItems(vector<Item*>);
-	void setDescripcion(string);
 	void setSalidas(Habitacion*, Habitacion*, Habitacion*, Habitacion*);
 	Item* itemExist(string);
 	void test();
@@ -63,12 +63,18 @@ Item Habitacion::quitarItem(int n) {
 }
 
 string Habitacion::getDescripcion() {
-	return descripcion;
+	string des = descripcion + "\n";
+	des += "En esta habitacion puedes encontrar: \n";
+	for (int i = 0; i < item.size(); i++) {
+		des += item[i]->getDesc() + "\n";
+	}
+	return des;
 }
 
-void Habitacion::setDescripcion(string d) {
-
+string Habitacion::getNombre() {
+	return nombre;
 }
+
 void Habitacion::setSalidas(Habitacion* norte, Habitacion* sur, Habitacion* este, Habitacion* oeste) {
 
 	salidas[0] = norte;

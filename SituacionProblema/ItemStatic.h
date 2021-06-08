@@ -1,5 +1,5 @@
 #pragma once
-#include "ItemPickable.h"
+#include "Item.h"
 class ItemStatic: public Item
 {
 public:

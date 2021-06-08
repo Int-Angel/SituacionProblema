@@ -1,20 +1,19 @@
 #pragma once
+#include"Item.h"
 class ItemPickable:public Item
 {
 public:
-	ItemPickable(string, string, vector<string>,string, vector<string>);
+	ItemPickable(string, string, vector<string>,string);
 	string getDesc();
 	virtual string interactuar();
 	void test()override;
 private:
 	bool inventario;
 	string accion;
-	vector<string> palabrasAccion;
 };
 
-ItemPickable::ItemPickable(string desc_, string nombre_, vector<string> palabras_, string d, vector<string> palabrasAccion_):Item(desc_,nombre_,palabras_) {
+ItemPickable::ItemPickable(string desc_, string nombre_, vector<string> palabras_, string d):Item(desc_,nombre_,palabras_) {
 	accion = d;
-	palabrasAccion = palabrasAccion_;
 	inventario = false;
 }
 string ItemPickable::getDesc() {
@@ -28,9 +27,6 @@ void ItemPickable::test() {
 	Item::test();
 	cout << "Accion: " + accion << endl;
 	cout << "Palabras accion: " << endl;
-	for (int i = 0; i < palabrasAccion.size(); i++) {
-		cout << palabrasAccion[i] << endl;
-	}
 	cout << "_______________________________________" << endl;
 }
 

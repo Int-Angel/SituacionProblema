@@ -223,7 +223,7 @@ ItemConsumible* Game::crearItemConsumible(string itemTxt) {
 	}
 
 	archivo.close();
-	return new ItemConsumible(desc, nombre, palabras, n, accion, palabras2);
+	return new ItemConsumible(desc, nombre, palabras2, n, accion);
 }
 
 ItemPickable* Game::crearItemPickable(string itemTxt) {
@@ -255,7 +255,7 @@ ItemPickable* Game::crearItemPickable(string itemTxt) {
 	}
 
 	archivo.close();
-	return new ItemPickable(desc, nombre, palabras, accion, palabras2);
+	return new ItemPickable(desc, nombre, palabras2, accion);
 }
 
 void Game::crearJugador() {
@@ -287,7 +287,7 @@ void Game::crearListaPalabras() {
 
 void Game::play() {
 	string instruccion;
-
+	//personaje->getHabitacion()->getDescripcion();
 	while (true) {
 		getline(cin, instruccion);
 		parser.procesaComando(instruccion);

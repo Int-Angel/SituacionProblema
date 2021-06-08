@@ -1,12 +1,10 @@
 #pragma once
-
-
-
+#include"Personaje.h"
 class Evento
 {
 public:
 	Evento(string,int,string, string);
-	bool Ejecutar(int, string);
+	bool Ejecutar(int, Personaje*);
 	void test();
 private:
 	string descripcion;
@@ -22,9 +20,14 @@ Evento::Evento(string desc, int n, string hab, string nom) {
 	nombreItem = nom;
 }
 
-bool Evento::Ejecutar(int n, string hab) {
-	//TODO
-	return true;
+bool Evento::Ejecutar(int n, Personaje *personaje) {
+	if (n >= nAcciones && personaje->getHabitacion()->getNombre() == habitacion) {
+		if (nombreItem == "none" || personaje->checkIfItemExists(nombreItem)) {
+			cout << descripcion << endl;
+			return true;
+		}
+	}
+	return false;
 }
 
 void Evento::test() {
