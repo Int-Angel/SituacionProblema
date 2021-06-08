@@ -13,12 +13,13 @@ public:
 	Personaje(string,Habitacion*);
 	void Parser();
 	Habitacion* getHabitacion();
-	void setHabitacionActual(Habitacion);
+	void setHabitacionActual(Habitacion*);
 	void addItem(ItemPickable*);
 	ItemPickable* dropItem(int);
 	void eliminarItem(int);
 	vector<ItemPickable*> getInventario();
 	ItemPickable* itemExist(string nombre);
+	bool checkIfItemExists(string nombre);
 private:
 	string nombre;
 	Habitacion *habActual;
@@ -43,8 +44,9 @@ Habitacion* Personaje::getHabitacion() {
 	return habActual;
 }
 
-void Personaje::setHabitacionActual(Habitacion hab) {
-
+void Personaje::setHabitacionActual(Habitacion* hab) {
+	habActual = hab;
+	cout << habActual->getDescripcion() << endl;
 }
 
 void Personaje::addItem(ItemPickable *item) {
@@ -69,4 +71,12 @@ ItemPickable* Personaje::itemExist(string nombre) {
 			return inventario[i];
 	}
 	return NULL;
+}
+
+bool Personaje::checkIfItemExists(string nombre) {
+	for (int i = 0; i < inventario.size(); ++i) {
+		if (nombre == inventario[i]->getNombre())
+			return true;
+	}
+	return false;
 }

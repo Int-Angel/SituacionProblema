@@ -69,8 +69,9 @@ void Game::crearEventos() {
 		string desc = "";
 		int n = -1;
 		string hab;
+		string nomItem;
 
-		while (getline(archivo,linea)) {
+		while (getline(archivo, linea)) {
 			if (linea == "STOP") {
 				getline(archivo, linea);
 				n = stoi(linea);
@@ -80,7 +81,9 @@ void Game::crearEventos() {
 			}
 			desc += linea + "\n";
 		}
-		evento.push_back(new Evento(desc, n, hab));
+		getline(archivo, nomItem);
+
+		evento.push_back(new Evento(desc, n, hab, nomItem));
 		archivo.close();
 		cont++;
 	}
@@ -124,7 +127,7 @@ void Game::crearHabitaciones() {
 		habitacion[i] = new Habitacion(nombre, descripcion, cerrada, nombreLlave);
 		habitacion[i]->setItems(crearItems(itemsTxt));
 	}
-	
+
 	habitacion[0]->setSalidas(habitacion[2], habitacion[1], NULL, NULL);
 	habitacion[1]->setSalidas(habitacion[0], NULL, NULL, NULL);
 	habitacion[2]->setSalidas(NULL, habitacion[0], NULL, habitacion[3]);
@@ -141,18 +144,18 @@ vector<Item*> Game::crearItems(vector<string> itemsTxt) {
 	ifstream archivo;
 
 	for (int i = 0; i < itemsTxt.size(); i++) {
-		archivo.open("items/"+itemsTxt[i]);
+		archivo.open("items/" + itemsTxt[i]);
 		getline(archivo, linea);
 		archivo.close();
 
 		if (linea == "static") {
-			items.push_back(crearItemStatic("items/"+itemsTxt[i]));
+			items.push_back(crearItemStatic("items/" + itemsTxt[i]));
 		}
 		else if (linea == "consumible") {
-			items.push_back(crearItemConsumible("items/"+itemsTxt[i]));
+			items.push_back(crearItemConsumible("items/" + itemsTxt[i]));
 		}
 		else if (linea == "pickable") {
-			items.push_back(crearItemPickable("items/"+itemsTxt[i]));
+			items.push_back(crearItemPickable("items/" + itemsTxt[i]));
 		}
 		else {
 			cout << "No se pudo identificar el item: " + itemsTxt[i] << endl;
@@ -255,14 +258,14 @@ void Game::crearJugador() {
 }
 
 void Game::crearListaPalabras() {
-	
+
 	vector<string> instruccionesTxt{ "agregar.txt","comandos.txt","desc.txt","desplazamiento.txt", "lugar.txt", "soltar.txt" };
 	vector<vector<string>> instrucciones(instruccionesTxt.size());
 	string linea;
 	ifstream archivo;
 
 	for (int i = 0; i < instruccionesTxt.size(); i++) {
-		archivo.open("instrucciones/"+instruccionesTxt[i]);
+		archivo.open("instrucciones/" + instruccionesTxt[i]);
 		while (getline(archivo, linea)) {
 			instrucciones[i].push_back(linea);
 		}
@@ -275,7 +278,7 @@ void Game::crearListaPalabras() {
 
 void Game::play() {
 	string instruccion;
-
+	// personaje->getHabitacion()->getDescripcion();
 	while (true) {
 		getline(cin, instruccion);
 		parser.procesaComando(instruccion);

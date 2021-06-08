@@ -1,4 +1,5 @@
 #pragma once
+#include "Item.h"
 class ItemPickable:public Item
 {
 public:
