@@ -64,10 +64,10 @@ void Habitacion::setDescripcion(string d) {
 }
 void Habitacion::setSalidas(Habitacion* norte, Habitacion* sur, Habitacion* este, Habitacion* oeste) {
 
-	*salidas[0] = *norte;
-	*salidas[1] = *este;
-	*salidas[2] = *sur;
-	*salidas[3] = *oeste;
+	salidas[0] = norte;
+	salidas[1] = este;
+	salidas[2] = sur;
+	salidas[3] = oeste;
 	/*
 	Salidas:
 	0 -> norte
@@ -86,6 +86,13 @@ void Habitacion::test() {
 		item[i]->test();
 	}
 	cout << endl << endl;
+
+	for (int i = 0; i < 4; i++) {
+		if (salidas[i] != NULL) {
+			cout << salidas[i]->nombre << endl;
+		}
+	}
+	cout << endl << endl << endl;
 }
 
 /*
