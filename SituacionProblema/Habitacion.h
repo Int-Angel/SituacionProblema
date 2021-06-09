@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include "Item.h"
+#include "Personaje.h"
 using namespace std;
 class Habitacion
 {
@@ -16,10 +17,14 @@ public:
 	string getDescripcion();
 	string getNombre();
 	void setItems(vector<Item*>);
-	void setDescripcion(string);
 	void setSalidas(Habitacion*, Habitacion*, Habitacion*, Habitacion*);
 	Habitacion* getSalida(int n);
 	Item* itemExist(string);
+	bool isClosed();
+	void setClosed(bool);
+	string getNombreLlave();
+	friend ostream& operator<<(ostream& salida, Habitacion* hab);
+
 	void test();
 private:
 	string nombre;
@@ -65,7 +70,8 @@ Item Habitacion::quitarItem(int n) {
 }
 
 string Habitacion::getDescripcion() {
-	string des = descripcion + "\n";
+	string des = nombre + "\n";
+	des += descripcion + "\n";
 	des += "En esta habitacion puedes encontrar: \n";
 	for (int i = 0; i < item.size(); ++i) {
 		des += item[i]->getDesc() + "\n";
@@ -77,9 +83,6 @@ string Habitacion::getNombre() {
 	return nombre;
 }
 
-void Habitacion::setDescripcion(string d) {
-
-}
 void Habitacion::setSalidas(Habitacion* norte, Habitacion* sur, Habitacion* este, Habitacion* oeste) {
 
 	salidas[0] = norte;
@@ -125,6 +128,24 @@ void Habitacion::test() {
 	}
 	cout << endl << endl << endl;
 }
+
+bool Habitacion::isClosed() {
+	return cerrada;
+}
+
+void Habitacion::setClosed(bool c) {
+	cerrada = c;
+}
+
+string Habitacion::getNombreLlave() {
+	return nombreLlave;
+}
+
+ostream& operator<<(ostream& salida, Habitacion* hab) {
+	salida << hab->getDescripcion();
+	return salida;
+}
+
 
 /*
 txt:
