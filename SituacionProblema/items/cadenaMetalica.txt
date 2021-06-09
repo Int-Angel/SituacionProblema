@@ -1,6 +1,6 @@
 pickable
 Cadena Metalica
-Cadena metalica ¿Que hace la cadena metalica aqui? Agarrala y llevala contigo.
+Cadena metalica Que hace la cadena metalica aqui? Agarrala y llevala contigo.
 usar
 usa
 golpear

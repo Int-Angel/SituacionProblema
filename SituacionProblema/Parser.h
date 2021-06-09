@@ -23,6 +23,8 @@ public:
 	Parser();
 	Parser(Personaje*, ListaPalabras&);
 	bool procesaComando(string);
+	void imprimirMapa();
+	bool ejecutaComando();
 private:
 	Personaje* personaje;
 	ListaPalabras palabras;
@@ -64,10 +66,9 @@ bool Parser::procesaComando(string instruccion) {
 
 	// Si la instruccion es de una palabra
 	if (palabra2 == "") {
-		if (tipo1 == "comando")
-			//ejecutaComando();
-			return true;
-		else
+		if (tipo1 == "comandos") {
+			return ejecutaComando();
+		}else
 			cout << msg2 << endl;
 		return false;
 	}
@@ -124,6 +125,11 @@ bool Parser::procesaComando(string instruccion) {
 		if (palabra2 == "oeste") dir = 3;
 		personaje->desplazar(dir);
 		return true;
+	}
+
+	if (tipo1 == "descripcion" && palabra2 == "mapa") {
+		imprimirMapa();
+		return false;
 	}
 
 	cout << msg1 << endl;
@@ -240,4 +246,34 @@ void Parser::test(vector<string> str) {
 	for (string s : str) {
 		cout << s << endl;
 	}
+}
+
+void Parser::imprimirMapa() {
+	ifstream archivo;
+	archivo.open("mapa.txt");
+	string linea;
+	string mapa = "";
+
+	while (getline(archivo, linea)) {
+		mapa += linea + "\n";
+	}
+	archivo.close();
+	cout << mapa << endl;
+}
+
+bool Parser::ejecutaComando() {
+	if (palabra1 == "buscar") {
+		cout << "Buscando..." << endl;
+		return true;
+	}
+	if (palabra1 == "help" || palabra1 =="ayuda") {
+		string msgAyuda = "No sabes que hacer, pero no te preocupes, recuerda....\n ->Cada comando es de 2 palabras\n ->Primero va el verbo y despues el objeto :D\n ->Existen comandos especiales como ayuda o salir que son solo de una palabra";
+		cout << msgAyuda << endl;
+		return false;
+	}
+	if (palabra1 == "salir" || palabra1=="exit") {
+		cout << endl << endl << endl << "Adios :D" << endl << endl;
+		exit(0);
+	}
+	return false;
 }

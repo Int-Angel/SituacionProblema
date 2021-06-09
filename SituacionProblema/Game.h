@@ -20,11 +20,11 @@ using namespace std;
 	TODO:
 	[-] Sobrecarga de operadores
 	[-] agarrar items
-	- drop items
-	- ITEMS
+	[-] drop items
+	[-] ITEMS
 	[-] habitacion con llave
 	- comandos de "buscar" y del propio juego, ayuda y salir
-	- Impresion perra
+	[-] Impresion perra
 
 
 */
@@ -282,7 +282,7 @@ void Game::crearListaPalabras() {
 	}
 	palabras.setLista(instrucciones);
 	palabras.setTipos(vector<string>{"agregar", "comandos", "descripcion", "desplazamiento", "lugar", "soltar" });
-	// palabras.test();
+	//palabras.test();
 }
 
 void Game::play() {

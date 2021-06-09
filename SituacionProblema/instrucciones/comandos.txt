@@ -1,8 +1,5 @@
 ayuda
-ayudar
 help
-helpme
 salir
 exit
-finalizar
-termina
+buscar

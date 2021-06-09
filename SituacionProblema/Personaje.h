@@ -24,7 +24,6 @@ private:
 	string nombre;
 	Habitacion *habActual;
 	int numeroMovimientos;
-	int maxInventario;
 	vector<ItemPickable*> inventario;
 };
 
@@ -32,7 +31,6 @@ private:
 Personaje::Personaje(string nombre_ , Habitacion* hab) {
 	nombre = nombre_;
 	habActual = hab;
-	maxInventario = 3;
 	numeroMovimientos = 0;
 }
 
