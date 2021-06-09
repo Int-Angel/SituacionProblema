@@ -1,6 +1,6 @@
 Sala de estar
-Es una humilde habitación, quizás una de las más vacías de toda la 
-casa, solo se encuentra una lámpara, pero es acogedora.
+Es una humilde habitacion, quizas una de las mas vacias de toda la 
+casa, solo se encuentra una lampara, pero es acogedora.
 STOP
 0
 lampara.txt

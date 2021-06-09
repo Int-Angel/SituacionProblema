@@ -6,7 +6,6 @@ class ItemStatic: public Item
 public:
 	ItemStatic(string, string, vector<string>,string[2]);
 	string getDesc();
-	string interactuar(Item*[10]);
 	string interactuar() override;
 	void test()override;
 private:
@@ -19,11 +18,9 @@ ItemStatic::ItemStatic(string desc_, string nombre_, vector<string> palabras_,st
 	estados[0] = estados_[0];
 	estados[1] = estados_[1];
 }
+
 string ItemStatic::getDesc() {
 	return Item::getDesc();
-}
-string ItemStatic::interactuar(Item* inv[10]) {
-	return estados[estado];
 }
 
 string ItemStatic::interactuar() {

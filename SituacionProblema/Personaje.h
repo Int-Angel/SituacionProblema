@@ -9,9 +9,7 @@ using namespace std;
 class Personaje
 {
 public:
-	Personaje();
 	Personaje(string,Habitacion*);
-	void Parser();
 	Habitacion* getHabitacion();
 	void setHabitacionActual(Habitacion*);
 	void addItem(ItemPickable*);
@@ -21,7 +19,8 @@ public:
 	ItemPickable* itemExist(string nombre);
 	bool checkIfItemExists(string nombre);
 	void desplazar(int);
-
+	Personaje& operator++();
+	
 private:
 	string nombre;
 	Habitacion *habActual;
@@ -30,16 +29,12 @@ private:
 	vector<ItemPickable*> inventario;
 };
 
-Personaje::Personaje() { }
 
 Personaje::Personaje(string nombre_ , Habitacion* hab) {
 	nombre = nombre_;
 	habActual = hab;
 	maxInventario = 3;
-}
-
-void Personaje::Parser() {
-
+	numeroMovimientos = 0;
 }
 
 Habitacion* Personaje::getHabitacion() {
@@ -95,13 +90,25 @@ bool Personaje::checkIfItemExists(string nombre) {
 }
 
 void Personaje::desplazar(int dir) {
-	if (habActual->getSalida(dir) != NULL)
-		habActual = habActual->getSalida(dir);
-	else
+	if (habActual->getSalida(dir) != NULL) {
+		if (habActual->getSalida(dir)->isClosed()) {
+			//abrir
+			habActual->getSalida(dir)->setClosed(!checkIfItemExists(habActual->getSalida(dir)->getNombreLlave()));
+		}
+		if (!habActual->getSalida(dir)->isClosed()) {
+			habActual = habActual->getSalida(dir);
+
+			cout << "El personaje se movio" << endl;
+			cout << habActual << endl;
+		}
+		else {
+			cout << "La habitacion esta cerrada... encuentra la llave" << endl;
+		}
+	}else
 		cout << "No existe esa habitacion " << endl;
+}
 
-
-	cout << "El personaje se movio" << endl;
-	cout << habActual->getNombre() << endl;
-	cout << habActual->getDescripcion() << endl;
+Personaje& Personaje::operator++() {
+	numeroMovimientos++;
+	return *this;
 }

@@ -1,5 +1,5 @@
 Taller
-Es un amplio salon, en él, solo se encuentra una mesa y tu caballete para pintar, 
+Es un amplio salon, en el, solo se encuentra una mesa y tu caballete para pintar, 
 del cual se sostiene la pintura. Este lugar tiene todo lo necesario para que
 pintes.
 STOP
