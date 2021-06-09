@@ -12,7 +12,7 @@ public:
 	void setItem(int Item);
 	vector<Item*> getItems();
 	void setItems(vector<Item>);
-	Item quitarItem(int);
+	bool quitarItem(Item*);
 	string getDescripcion();
 	string getNombre();
 	void setItems(vector<Item*>);
@@ -60,8 +60,15 @@ vector<Item*> Habitacion::getItems() {
 	return item; 
 }
 
-Item Habitacion::quitarItem(int n) {
-	return *item[n];
+bool Habitacion::quitarItem(Item* item_) {
+	for (int i = 0; i < item.size(); ++i) {
+		if (item_ == item[i]) {
+			Item* aux = item[i];
+			item.erase(item.begin() + i);
+			return true;
+		}
+	}
+	return false;
 }
 
 string Habitacion::getDescripcion() {

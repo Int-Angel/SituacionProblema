@@ -1,6 +1,7 @@
 #pragma once
 #include "Item.h"
-class ItemConsumible: public Item
+#include "ItemPickable.h"
+class ItemConsumible: public ItemPickable
 {
 public:
 	ItemConsumible(string, string, vector<string>,int,string);
@@ -14,7 +15,7 @@ private:
 	string accion;
 };
 
-ItemConsumible::ItemConsumible(string desc_, string nombre_, vector<string> palabras_,int n,string accion_):Item(desc_, nombre_, palabras_) {
+ItemConsumible::ItemConsumible(string desc_, string nombre_, vector<string> palabras_,int n,string accion_):ItemPickable(desc_, nombre_, palabras_, accion_) {
 	cantidad = n;
 	accion = accion_;
 	inventario = false;
