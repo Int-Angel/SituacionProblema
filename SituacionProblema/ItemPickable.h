@@ -6,6 +6,8 @@ public:
 	ItemPickable(string, string, vector<string>,string);
 	string getDesc();
 	string interactuar() override;
+	void setInventario(bool);
+	string getAccion();
 	void test()override;
 private:
 	bool inventario;
@@ -19,10 +21,17 @@ ItemPickable::ItemPickable(string desc_, string nombre_, vector<string> palabras
 string ItemPickable::getDesc() {
 	return Item::getDesc();
 }
+string ItemPickable::getAccion() {
+	return accion;
+}
 string ItemPickable::interactuar() {
 	//return inventario ? accion : "Agregado al inventario";
 	cout << "Accion " + accion << endl;
 	return accion;
+}
+
+void ItemPickable::setInventario(bool inventario) {
+	this->inventario = inventario;
 }
 
 void ItemPickable::test() {

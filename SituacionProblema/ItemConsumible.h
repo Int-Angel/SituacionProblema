@@ -10,21 +10,21 @@ public:
 	void setCantidad(int);
 	void test()override;
 private:
-	bool inventario;
 	int cantidad;
-	string accion;
 };
-
 
 ItemConsumible::ItemConsumible(string desc_, string nombre_, vector<string> palabras_, int n, string accion_) :ItemPickable(desc_, nombre_, palabras_, accion_) {
 	cantidad = n;
-	accion = accion_;
-	inventario = false;
+	ItemPickable::setInventario(false);
 }
 
 string ItemConsumible::interactuar() {
 	//return inventario ? accion : "Agregado al inventario";
-	return accion;
+	if (cantidad == 0)
+		return "Ya no puedes consumir este item, te lo has acabado";
+
+	cantidad--;
+	return ItemPickable::getAccion();
 }
 
 int ItemConsumible::getCantidad() {
@@ -38,7 +38,7 @@ void ItemConsumible::setCantidad(int n) {
 void ItemConsumible::test() {
 	Item::test();
 	cout << "Cantidad: " << cantidad << endl;
-	cout << "Accion: " + accion << endl;
+	cout << "Accion: " + ItemPickable::getAccion() << endl;
 	cout << "_______________________________________" << endl;
 }
 
