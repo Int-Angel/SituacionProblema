@@ -85,7 +85,7 @@ string Habitacion::getDescripcion() {
 	des += descripcion + "\n";
 	des += "En esta habitacion puedes encontrar: \n";
 	for (int i = 0; i < item.size(); ++i) {
-		des += item[i]->getDesc() + "\n";
+		des += item[i]->getNombre() + "\n";
 	}
 	return des;
 }
