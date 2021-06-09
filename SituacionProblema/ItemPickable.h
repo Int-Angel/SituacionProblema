@@ -25,8 +25,6 @@ string ItemPickable::getAccion() {
 	return accion;
 }
 string ItemPickable::interactuar() {
-	//return inventario ? accion : "Agregado al inventario";
-	cout << "Accion " + accion << endl;
 	return accion;
 }
 

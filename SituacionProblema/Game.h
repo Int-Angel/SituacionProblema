@@ -16,18 +16,6 @@ using namespace std;
 #include"Parser.h"
 #include"ListaPalabras.h"
 
-/*
-	TODO:
-	[-] Sobrecarga de operadores
-	[-] agarrar items
-	[-] drop items
-	[-] ITEMS
-	[-] habitacion con llave
-	- comandos de "buscar" y del propio juego, ayuda y salir
-	[-] Impresion perra
-
-
-*/
 class Game
 {
 public:
@@ -289,12 +277,20 @@ void Game::play() {
 	string instruccion;
 	cout << personaje->getHabitacion() << endl;
 
+	bool success = evento[nEvento]->Ejecutar(nAcciones, personaje);
+
+	if (success) {
+		nAcciones = 0;
+		nEvento++;
+	}
+	cout << endl << "Presiona una tecla para continuar...";
+	getline(cin, instruccion);
 	while (nEvento < evento.size()) {
 		system("cls");
 		cout << personaje->getHabitacion() << endl;
 		cout << ">>>";
 		getline(cin, instruccion);
-		bool success = parser.procesaComando(instruccion);
+		success = parser.procesaComando(instruccion);
 		
 		if (success) {
 			nAcciones++;

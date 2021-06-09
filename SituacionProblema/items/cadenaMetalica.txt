@@ -1,5 +1,5 @@
 pickable
-Cadena Metalica
+Cadena
 Cadena metalica Que hace la cadena metalica aqui? Agarrala y llevala contigo.
 usar
 usa

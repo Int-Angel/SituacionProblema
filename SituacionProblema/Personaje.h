@@ -46,14 +46,9 @@ void Personaje::setHabitacionActual(Habitacion* hab) {
 void Personaje::addItem(ItemPickable* item) {
 
 	inventario.push_back(item);
-	if (habActual->quitarItem(item)) {
-		cout << "Se elimino el item de la habitacion" << endl;
-	}
-	else {
-		cout << "Error al eliminar el item de la habitacion" << endl;
-	}
+	habActual->quitarItem(item);
 
-	cout << "Imprimiendo lista de items " << endl;
+	cout << endl<<"Este es tu Inventario: " << endl;
 	for (int i = 0; i < inventario.size(); ++i) {
 		cout << inventario[i]->getNombre() << endl;
 	}
@@ -65,7 +60,7 @@ bool Personaje::dropItem(ItemPickable* item) {
 			habActual->addItem(inventario[i]);
 			inventario.erase(inventario.begin() + i);
 
-			cout << "Imprimiendo lista de items " << endl;
+			cout <<endl <<"Este es tu Inventario: " << endl;
 			for (int i = 0; i < inventario.size(); ++i) {
 				cout << inventario[i]->getNombre() << endl;
 			}
@@ -106,7 +101,6 @@ void Personaje::desplazar(int dir) {
 			habActual = habActual->getSalida(dir);
 
 			cout << "El personaje se movio" << endl << endl;
-			//cout << habActual << endl;
 		}
 		else {
 			cout << "La habitacion esta cerrada... encuentra la llave" << endl;

@@ -7,4 +7,4 @@ de una vez por todas.
 STOP
 0
 Sala de estar
-none 
+none

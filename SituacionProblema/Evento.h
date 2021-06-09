@@ -23,8 +23,8 @@ Evento::Evento(string desc, int n, string hab, string nom) {
 
 bool Evento::Ejecutar(int n, Personaje* personaje) {
 	if (n >= nAcciones && toLower(personaje->getHabitacion()->getNombre()) == toLower(habitacion)) {
-		if (nombreItem == "none" || personaje->checkIfItemExists(nombreItem) || true) {
-			cout << descripcion << endl;
+		if (nombreItem == "none" || (nombreItem != "none" && personaje->checkIfItemExists(nombreItem))) {
+			cout << endl<<descripcion << endl;
 			return true;
 		}
 	}

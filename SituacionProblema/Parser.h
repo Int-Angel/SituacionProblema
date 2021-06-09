@@ -145,12 +145,9 @@ void Parser::getPalabras(string str) {
 	palabra2 = "";
 	string instruccion = toLower(str);
 	istringstream ss(instruccion);
-	cout << "PALABRAS" << endl;
 	ss >> palabra1;
 	ss >> palabra2;
 	ss.ignore();
-	cout << palabra1 << endl;
-	cout << palabra2 << endl;
 }
 
 bool Parser::exist(string palabra, vector<string> listaPalabras) {
@@ -192,10 +189,10 @@ void Parser::getSemanticValue() {
 		}
 
 		if (exist(palabra1, personaje->getHabitacion()->getItems()[i]->getPalabras())) {
-			tipo1 = "interactuar";
-
+		
 			if (palabra2 == toLower(personaje->getHabitacion()->getItems()[i]->getNombre())) {
 				item = personaje->getHabitacion()->getItems()[i];
+				tipo1 = "interactuar";
 				tipo2 = "objeto";
 				return;
 			}
@@ -222,11 +219,10 @@ void Parser::getSemanticValue() {
 		}
 
 		if (exist(palabra1, personaje->getInventario()[i]->getPalabras())) {
-			tipo1 = "interactuar";
-
 			if (palabra2 == toLower(personaje->getInventario()[i]->getNombre())) {
 				item = personaje->getInventario()[i];
 				tipo2 = "objeto";
+				tipo1 = "interactuar";
 				return;
 			}
 		}
