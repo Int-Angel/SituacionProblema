@@ -1,5 +1,6 @@
 #pragma once
 #include "Item.h"
+#include "ItemPickable.h"
 class ItemConsumible: public ItemPickable
 {
 public:
@@ -13,6 +14,7 @@ private:
 	int cantidad;
 	string accion;
 };
+
 
 ItemConsumible::ItemConsumible(string desc_, string nombre_, vector<string> palabras_, int n, string accion_) :ItemPickable(desc_, nombre_, palabras_, accion_) {
 	cantidad = n;

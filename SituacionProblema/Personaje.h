@@ -47,6 +47,7 @@ void Personaje::setHabitacionActual(Habitacion* hab) {
 }
 
 void Personaje::addItem(ItemPickable* item) {
+
 	inventario.push_back(item);
 	if (habActual->quitarItem(item)) {
 		cout << "Se elimino el item de la habitacion" << endl;
