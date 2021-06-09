@@ -287,8 +287,12 @@ void Game::crearListaPalabras() {
 
 void Game::play() {
 	string instruccion;
-	cout << personaje->getHabitacion()<< endl;
+	cout << personaje->getHabitacion() << endl;
+
 	while (nEvento < evento.size()) {
+		system("cls");
+		cout << personaje->getHabitacion() << endl;
+		cout << ">>>";
 		getline(cin, instruccion);
 		bool success = parser.procesaComando(instruccion);
 		
@@ -302,6 +306,8 @@ void Game::play() {
 			nAcciones = 0;
 			nEvento++;
 		}
+		cout << endl << "Presiona una tecla para continuar...";
+		getline(cin, instruccion);
 	}
 
 	cout << endl << endl << "Fin" << endl;

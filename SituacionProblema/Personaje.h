@@ -107,8 +107,8 @@ void Personaje::desplazar(int dir) {
 		if (!habActual->getSalida(dir)->isClosed()) {
 			habActual = habActual->getSalida(dir);
 
-			cout << "El personaje se movio" << endl;
-			cout << habActual << endl;
+			cout << "El personaje se movio" << endl << endl;
+			//cout << habActual << endl;
 		}
 		else {
 			cout << "La habitacion esta cerrada... encuentra la llave" << endl;

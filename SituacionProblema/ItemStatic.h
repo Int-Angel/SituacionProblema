@@ -24,7 +24,8 @@ string ItemStatic::getDesc() {
 }
 
 string ItemStatic::interactuar() {
-	return estados[0];
+	estado = estado == 0 ? 1 : 0;
+	return estados[estado];
 }
 
 void ItemStatic::test() {
