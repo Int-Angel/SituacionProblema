@@ -13,6 +13,8 @@ using namespace std;
 // Mensajes del Parser
 const char* msg1 = "No comprendo la instruccion. Verifique que las palabras hayan sido escritas corretamente y que el orden de ellas sea el adecuado";
 const char* msg2 = "No comprendo la instruccion. Verifique que la instruccion tecleada sea un comando";
+const char* msg3 = "Ese objeto no puede ser llevado en tu inventario.";
+const char* msg4 = "El objeto se ha agregado a tu inventario";
 
 class Parser
 {
@@ -43,9 +45,9 @@ Parser::Parser(Personaje* personaje, ListaPalabras& palabras) {
 	palabra1 = "";
 	palabra2 = "";
 	tipo1 = "";
-tipo2 = "";
+	tipo2 = "";
 
-item = NULL;
+	item = NULL;
 }
 
 bool Parser::procesaComando(string instruccion) {
@@ -74,7 +76,13 @@ bool Parser::procesaComando(string instruccion) {
 
 	// Si la instruccion es de dos palabras
 	if (tipo1 == "agregar" && tipo2 == "objeto") {
-		//personaje.addItem(item);
+		if (ItemPickable* pickable = dynamic_cast<ItemPickable*>(item)) {
+			personaje->addItem(pickable);
+			cout << msg4 << endl;
+		}
+		else {
+			cout << msg3 << endl;
+		}
 		return true;
 	}
 
@@ -84,7 +92,17 @@ bool Parser::procesaComando(string instruccion) {
 	}
 
 	if (tipo1 == "interactuar" && tipo2 == "objeto") {
-		cout << item->interactuar() << endl;
+		if (ItemPickable* pickable = dynamic_cast<ItemPickable*>(item)) {
+			if (personaje->itemExist(item->getNombre())) {
+				cout << item->interactuar() << endl;
+			}
+			else {
+				cout << "El objeto necesita estar en tu inventario para interactuar" << endl;
+			}
+		}
+		else {
+			cout << item->interactuar() << endl;
+		}
 		return true;
 	}
 
@@ -157,12 +175,18 @@ void Parser::getSemanticValue() {
 			return;
 		}
 
+		if (palabra2 == toLower(personaje->getHabitacion()->getItems()[i]->getNombre())) {
+			item = personaje->getHabitacion()->getItems()[i];
+			tipo2 = "objeto";
+		}
+
 		if (exist(palabra1, personaje->getHabitacion()->getItems()[i]->getPalabras())) {
 			tipo1 = "interactuar";
 
 			if (palabra2 == toLower(personaje->getHabitacion()->getItems()[i]->getNombre())) {
 				item = personaje->getHabitacion()->getItems()[i];
 				tipo2 = "objeto";
+				return;
 			}
 		}
 	}
@@ -181,12 +205,18 @@ void Parser::getSemanticValue() {
 			return;
 		}
 
+		if (palabra2 == toLower(personaje->getInventario()[i]->getNombre())) {
+			item = personaje->getInventario()[i];
+			tipo2 = "objeto";
+		}
+
 		if (exist(palabra1, personaje->getInventario()[i]->getPalabras())) {
 			tipo1 = "interactuar";
 
 			if (palabra2 == toLower(personaje->getInventario()[i]->getNombre())) {
 				item = personaje->getInventario()[i];
 				tipo2 = "objeto";
+				return;
 			}
 		}
 	}

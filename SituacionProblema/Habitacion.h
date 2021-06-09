@@ -24,6 +24,7 @@ public:
 	void setClosed(bool);
 	string getNombreLlave();
 	friend ostream& operator<<(ostream& salida, Habitacion* hab);
+	bool quitarItem(Item*);
 
 	void test();
 private:
@@ -144,6 +145,17 @@ string Habitacion::getNombreLlave() {
 ostream& operator<<(ostream& salida, Habitacion* hab) {
 	salida << hab->getDescripcion();
 	return salida;
+}
+
+bool Habitacion::quitarItem(Item* item_) {
+	for (int i = 0; i < item.size(); ++i) {
+		if (item_ == item[i]) {
+			Item* aux = item[i];
+			item.erase(item.begin() + i);
+			return true;
+		}
+	}
+	return false;
 }
 
 

@@ -46,8 +46,19 @@ void Personaje::setHabitacionActual(Habitacion* hab) {
 	cout << habActual->getDescripcion() << endl;
 }
 
-void Personaje::addItem(ItemPickable *item) {
+void Personaje::addItem(ItemPickable* item) {
+	inventario.push_back(item);
+	if (habActual->quitarItem(item)) {
+		cout << "Se elimino el item de la habitacion" << endl;
+	}
+	else {
+		cout << "Error al eliminar el item de la habitacion" << endl;
+	}
 
+	cout << "Imprimiendo lista de items " << endl;
+	for (int i = 0; i < inventario.size(); ++i) {
+		cout << inventario[i]->getNombre() << endl;
+	}
 }
 
 ItemPickable* Personaje::dropItem(int n) {

@@ -19,10 +19,10 @@ using namespace std;
 /*
 	TODO:
 	[-] Sobrecarga de operadores
-	- agarrar items
+	[-] agarrar items
 	- drop items
 	- ITEMS
-	- habitacion con llave
+	[-] habitacion con llave
 	- comandos de "buscar" y del propio juego, ayuda y salir
 	- Impresion perra
 
