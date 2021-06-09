@@ -15,6 +15,7 @@ const char* msg1 = "No comprendo la instruccion. Verifique que las palabras haya
 const char* msg2 = "No comprendo la instruccion. Verifique que la instruccion tecleada sea un comando";
 const char* msg3 = "Ese objeto no puede ser llevado en tu inventario.";
 const char* msg4 = "El objeto se ha agregado a tu inventario";
+const char* msg5 = "Solo puedes eliminar objetos que esten en tu inventario";
 
 class Parser
 {
@@ -61,9 +62,6 @@ bool Parser::procesaComando(string instruccion) {
 	}
 	getSemanticValue();
 
-	cout << "TIPOS" << endl;
-	cout << "Tipo 1: " << tipo1 << endl;
-	cout << "Tipo 2: " << tipo2 << endl;
 	// Si la instruccion es de una palabra
 	if (palabra2 == "") {
 		if (tipo1 == "comando")
@@ -87,7 +85,14 @@ bool Parser::procesaComando(string instruccion) {
 	}
 
 	if (tipo1 == "soltar" && tipo2 == "objeto") {
-		//personaje.dropItem(item);
+		if (ItemPickable* pickable = dynamic_cast<ItemPickable*>(item)) {
+			if (personaje->dropItem(pickable)) {
+				cout << "Se ha eliminado el item de tu inventario" << endl;
+			}
+		}
+		else {
+			cout << msg5 << endl;
+		}
 		return true;
 	}
 

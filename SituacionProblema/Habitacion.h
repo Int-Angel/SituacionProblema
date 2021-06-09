@@ -12,6 +12,7 @@ public:
 	Item getItem(int);
 	void setItem(int Item);
 	vector<Item*> getItems();
+	void addItem(Item*);
 	void setItems(vector<Item>);
 	bool quitarItem(Item*);
 	string getDescripcion();
@@ -24,7 +25,6 @@ public:
 	void setClosed(bool);
 	string getNombreLlave();
 	friend ostream& operator<<(ostream& salida, Habitacion* hab);
-	bool quitarItem(Item*);
 
 	void test();
 private:
@@ -66,10 +66,13 @@ vector<Item*> Habitacion::getItems() {
 	return item; 
 }
 
+void Habitacion::addItem(Item* item_) {
+	item.push_back(item_);
+}
+
 bool Habitacion::quitarItem(Item* item_) {
 	for (int i = 0; i < item.size(); ++i) {
 		if (item_ == item[i]) {
-			Item* aux = item[i];
 			item.erase(item.begin() + i);
 			return true;
 		}
@@ -152,17 +155,6 @@ string Habitacion::getNombreLlave() {
 ostream& operator<<(ostream& salida, Habitacion* hab) {
 	salida << hab->getDescripcion();
 	return salida;
-}
-
-bool Habitacion::quitarItem(Item* item_) {
-	for (int i = 0; i < item.size(); ++i) {
-		if (item_ == item[i]) {
-			Item* aux = item[i];
-			item.erase(item.begin() + i);
-			return true;
-		}
-	}
-	return false;
 }
 
 

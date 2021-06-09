@@ -13,8 +13,7 @@ public:
 	Habitacion* getHabitacion();
 	void setHabitacionActual(Habitacion*);
 	void addItem(ItemPickable*);
-	ItemPickable* dropItem(int);
-	void eliminarItem(int);
+	bool dropItem(ItemPickable*);
 	vector<ItemPickable*> getInventario();
 	ItemPickable* itemExist(string nombre);
 	bool checkIfItemExists(string nombre);
@@ -62,12 +61,21 @@ void Personaje::addItem(ItemPickable* item) {
 	}
 }
 
-ItemPickable* Personaje::dropItem(int n) {
-	return inventario[n];
-}
+bool Personaje::dropItem(ItemPickable* item) {
+	for (int i = 0; i < inventario.size(); ++i) {
+		if (item == inventario[i]) {
+			habActual->addItem(inventario[i]);
+			inventario.erase(inventario.begin() + i);
 
-void Personaje::eliminarItem(int n) {
+			cout << "Imprimiendo lista de items " << endl;
+			for (int i = 0; i < inventario.size(); ++i) {
+				cout << inventario[i]->getNombre() << endl;
+			}
 
+			return true;
+		}
+	}
+	return false;
 }
 
 vector<ItemPickable*> Personaje::getInventario() {
