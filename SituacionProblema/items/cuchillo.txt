@@ -7,7 +7,7 @@ clavar
 clava
 golpear
 golpea
-navajae
+navajea
 navajear
 cortar
 corta
