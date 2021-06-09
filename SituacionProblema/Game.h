@@ -133,9 +133,6 @@ void Game::crearHabitaciones() {
 	habitacion[2]->setSalidas(NULL, habitacion[0], NULL, habitacion[3]);
 	habitacion[3]->setSalidas(NULL, NULL, habitacion[2], NULL);
 
-	for (int i = 0; i < 4; i++) {
-		habitacion[i]->test();
-	}
 }
 
 vector<Item*> Game::crearItems(vector<string> itemsTxt) {
@@ -278,10 +275,18 @@ void Game::crearListaPalabras() {
 
 void Game::play() {
 	string instruccion;
-	// personaje->getHabitacion()->getDescripcion();
+	cout << personaje->getHabitacion()->getDescripcion() << endl;
 	while (true) {
 		getline(cin, instruccion);
-		parser.procesaComando(instruccion);
+		bool success = parser.procesaComando(instruccion);
+		
+		if (success) nAcciones++;
+		success = evento[nEvento]->Ejecutar(nAcciones, personaje);
+
+		if (success) {
+			nAcciones = 0;
+			nEvento++;
+		}
 	}
 }
 

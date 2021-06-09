@@ -21,6 +21,7 @@ public:
 	ItemPickable* itemExist(string nombre);
 	bool checkIfItemExists(string nombre);
 	void desplazar(int);
+
 private:
 	string nombre;
 	Habitacion *habActual;

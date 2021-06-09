@@ -8,4 +8,3 @@ STOP
 0
 Sala de estar
 none 
-© 2021 GitHub, Inc.

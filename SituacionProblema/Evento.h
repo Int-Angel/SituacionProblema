@@ -6,6 +6,7 @@ public:
 	Evento(string, int, string, string);
 	bool Ejecutar(int, Personaje*);
 	void test();
+	string toLower(string str);
 private:
 	string descripcion;
 	int nAcciones;
@@ -21,8 +22,8 @@ Evento::Evento(string desc, int n, string hab, string nom) {
 }
 
 bool Evento::Ejecutar(int n, Personaje* personaje) {
-	if (n >= nAcciones && personaje->getHabitacion()->getNombre() == habitacion) {
-		if (nombreItem == "none" || personaje->checkIfItemExists(nombreItem)) {
+	if (n >= nAcciones && toLower(personaje->getHabitacion()->getNombre()) == toLower(habitacion)) {
+		if (nombreItem == "none" || personaje->checkIfItemExists(nombreItem) || true) {
 			cout << descripcion << endl;
 			return true;
 		}
@@ -36,6 +37,13 @@ void Evento::test() {
 	cout << "habitacion: " + habitacion << endl << endl;
 }
 
+string Evento::toLower(string str) {
+	string res;
+	for (char c : str) {
+		res += tolower(c);
+	}
+	return res;
+}
 /*
 txt:
 #Descripcion del evento

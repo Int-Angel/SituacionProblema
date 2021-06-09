@@ -19,7 +19,7 @@ class Parser
 public:
 	Parser();
 	Parser(Personaje*, ListaPalabras&);
-	void procesaComando(string);
+	bool procesaComando(string);
 private:
 	Personaje* personaje;
 	ListaPalabras palabras;
@@ -48,9 +48,15 @@ tipo2 = "";
 item = NULL;
 }
 
-void Parser::procesaComando(string instruccion) {
+bool Parser::procesaComando(string instruccion) {
 	// 1. Descomponemos el string con las instrucciones
-	getPalabras(instruccion);
+	try {
+		getPalabras(instruccion);
+	}
+	catch (invalid_argument e) {
+		cout << e.what() << endl;
+		return false;
+	}
 	getSemanticValue();
 
 	cout << "TIPOS" << endl;
@@ -60,31 +66,31 @@ void Parser::procesaComando(string instruccion) {
 	if (palabra2 == "") {
 		if (tipo1 == "comando")
 			//ejecutaComando();
-			return;
+			return true;
 		else
 			cout << msg2 << endl;
-		return;
+		return false;
 	}
 
 	// Si la instruccion es de dos palabras
 	if (tipo1 == "agregar" && tipo2 == "objeto") {
 		//personaje.addItem(item);
-		return;
+		return true;
 	}
 
 	if (tipo1 == "soltar" && tipo2 == "objeto") {
 		//personaje.dropItem(item);
-		return;
+		return true;
 	}
 
 	if (tipo1 == "interactuar" && tipo2 == "objeto") {
 		cout << item->interactuar() << endl;
-		return;
+		return true;
 	}
 
 	if (tipo1 == "descripcion" && tipo2 == "objeto") {
 		cout << item->getDesc() << endl;
-		return;
+		return true;
 	}
 
 	if (tipo1 == "desplazamiento" && tipo2 == "lugar") {
@@ -94,13 +100,18 @@ void Parser::procesaComando(string instruccion) {
 		if (palabra2 == "sur") dir = 2;
 		if (palabra2 == "oeste") dir = 3;
 		personaje->desplazar(dir);
-		return;
+		return true;
 	}
 
 	cout << msg1 << endl;
+	return false;
 }
 
 void Parser::getPalabras(string str) {
+
+	if (str == "" || str.size() == 0) {
+		throw invalid_argument(msg1);
+	}
 	palabra1 = "";
 	palabra2 = "";
 	string instruccion = toLower(str);
