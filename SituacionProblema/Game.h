@@ -16,6 +16,12 @@ using namespace std;
 #include"Parser.h"
 #include"ListaPalabras.h"
 
+/*
+	clase Game, se encarga de crear todo el juego y hacer el loop del mismo.
+		- toda la informacion se obtiene de archivos de texto
+		- la lista de eventos funciona como una cadena, primero se tiene que ejecutar el evento 1 antes que el 2
+*/
+
 class Game
 {
 public:
@@ -64,7 +70,7 @@ void Game::crearEventos() {
 
 	while (true) {
 		archivo.open("evento" + to_string(cont) + ".txt");
-		if (!archivo)break;
+		if (!archivo)break; // paramos de leer porque ya no hay mas eventos
 
 		string desc = "";
 		int n = -1;
@@ -73,17 +79,17 @@ void Game::crearEventos() {
 
 		while (getline(archivo, linea)) {
 			if (linea == "STOP") {
-				getline(archivo, linea);
+				getline(archivo, linea); // leemos el numero de acciones para ejecutarlo
 				n = stoi(linea);
-				getline(archivo, linea);
+				getline(archivo, linea); // leemos la habitacion
 				hab = linea;
 				break;
 			}
-			desc += linea + "\n";
+			desc += linea + "\n"; //leemos el evento
 		}
-		getline(archivo, nomItem);
+		getline(archivo, nomItem); // leemos el item
 
-		evento.push_back(new Evento(desc, n, hab, nomItem));
+		evento.push_back(new Evento(desc, n, hab, nomItem)); //creamos evento
 		archivo.close();
 		cont++;
 	}
@@ -103,31 +109,32 @@ void Game::crearHabitaciones() {
 		string nombreLlave = "";
 		vector<string> itemsTxt;
 
-		getline(archivo, nombre);
+		getline(archivo, nombre); // leemos el nombre de la habitacion
 
-		while (getline(archivo, linea)) {
+		while (getline(archivo, linea)) { //leemos la descripocion de la habitacion
 			if (linea == "STOP")break;
 			descripcion += linea + "\n";
 		}
 
-		getline(archivo, linea);
+		getline(archivo, linea); // leemos si esta cerrada o no la habitacion
 		if (linea == "1") {
 			cerrada = true;
-			getline(archivo, nombreLlave);
+			getline(archivo, nombreLlave); // nombre de la llave para abrir la habitacion
 		}
 		else {
 			cerrada = false;
 		}
 
-		while (getline(archivo, linea)) {
+		while (getline(archivo, linea)) { // leemos los items que hay en la habitacion
 			itemsTxt.push_back(linea);
 		}
 		archivo.close();
 
-		habitacion[i] = new Habitacion(nombre, descripcion, cerrada, nombreLlave);
-		habitacion[i]->setItems(crearItems(itemsTxt));
+		habitacion[i] = new Habitacion(nombre, descripcion, cerrada, nombreLlave);// crear habitacion
+		habitacion[i]->setItems(crearItems(itemsTxt)); // creamos y añadimos los items
 	}
 
+	//Salidas
 	habitacion[0]->setSalidas(habitacion[2], habitacion[1], NULL, NULL);
 	habitacion[1]->setSalidas(habitacion[0], NULL, NULL, NULL);
 	habitacion[2]->setSalidas(NULL, habitacion[0], NULL, habitacion[3]);
@@ -145,6 +152,7 @@ vector<Item*> Game::crearItems(vector<string> itemsTxt) {
 		getline(archivo, linea);
 		archivo.close();
 
+		// checar de que tipo de item es
 		if (linea == "static") {
 			items.push_back(crearItemStatic("items/" + itemsTxt[i]));
 		}
@@ -171,8 +179,8 @@ ItemStatic* Game::crearItemStatic(string itemTxt) {
 	vector<string> palabras;
 
 	getline(archivo, linea);
-	getline(archivo, nombre);
-	getline(archivo, desc);
+	getline(archivo, nombre);//nombre
+	getline(archivo, desc);//descripcion
 
 	while (getline(archivo, linea)) {
 		if (linea == "STOP") break;
@@ -275,30 +283,32 @@ void Game::crearListaPalabras() {
 
 void Game::play() {
 	string instruccion;
+
+	//Inicio del juego, se imprime la habitacion y el primer evento de la historia
 	cout << personaje->getHabitacion() << endl;
-
 	bool success = evento[nEvento]->Ejecutar(nAcciones, personaje);
-
 	if (success) {
 		nAcciones = 0;
 		nEvento++;
 	}
 	cout << endl << "Presiona una tecla para continuar...";
 	getline(cin, instruccion);
-	while (nEvento < evento.size()) {
+
+	while (nEvento < evento.size()) { // ciclo de juego
 		system("cls");
 		cout << personaje->getHabitacion() << endl;
 		cout << ">>>";
 		getline(cin, instruccion);
-		success = parser.procesaComando(instruccion);
+		success = parser.procesaComando(instruccion); // prosesar comando
 		
-		if (success) {
+		if (success) { // se ejecuto el comando correctamente
 			nAcciones++;
-			++*personaje;
+			++*personaje; // incrementamos el numero de movimientos
 		}
-		success = evento[nEvento]->Ejecutar(nAcciones, personaje);
 
-		if (success) {
+		success = evento[nEvento]->Ejecutar(nAcciones, personaje); // Ejecutamos el evento
+
+		if (success) {// evento se ejecuto correctamente
 			nAcciones = 0;
 			nEvento++;
 		}
@@ -307,6 +317,6 @@ void Game::play() {
 	}
 
 	cout << endl << endl << "Fin" << endl;
-	cout << endl << endl << endl << "\t\t\t ? " << endl;
+	cout << endl << endl << endl << "\t ? " << endl;
 }
 

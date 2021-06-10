@@ -3,6 +3,13 @@
 #include<vector>
 using namespace std;
 
+/*
+
+	clase base para los items del juego, cada item tiene sus propias palabras para interactuar
+	como por ejecmplo la manzana tiene "comer" y la radio tiene "escuchar", pero estas
+	llaman al metodo de iteractuar().
+
+*/
 class Item
 {
 public:

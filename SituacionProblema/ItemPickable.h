@@ -1,5 +1,9 @@
 #pragma once
 #include "Item.h"
+
+/*
+	clase usada para items que puedes agregar al invetario como la radio o una llave
+*/
 class ItemPickable:public Item
 {
 public:

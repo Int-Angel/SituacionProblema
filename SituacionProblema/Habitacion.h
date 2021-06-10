@@ -4,13 +4,19 @@
 #include "Item.h"
 #include "Personaje.h"
 using namespace std;
+
+/*
+	Clase base para todas las habitaciones:
+		- contiene items
+		- puede estar cerrada o no
+		- si esta cerrada necesita el nombre de la llave que la abre, que es el nombre de un item
+
+*/
 class Habitacion
 {
 public:
-	Habitacion(string,string,bool);
 	Habitacion(string, string, bool,string);
 	Item getItem(int);
-	void setItem(int Item);
 	vector<Item*> getItems();
 	void addItem(Item*);
 	void setItems(vector<Item>);
@@ -36,13 +42,6 @@ private:
 	string nombreLlave;
 };
 
-Habitacion::Habitacion(string nombre_,string des, bool cerrada_) {
-	nombre = nombre_;
-	descripcion = des;
-	cerrada = cerrada_;
-	nombreLlave = "";
-}
-
 Habitacion::Habitacion(string nombre_, string des, bool cerrada_,string nombreLlave_) {
 	nombre = nombre_;
 	descripcion = des;
@@ -56,10 +55,6 @@ void Habitacion::setItems(vector<Item*> item_) {
 
 Item Habitacion::getItem(int n) {
 	return *item[n];
-}
-
-void Habitacion::setItem(int Item) {
-
 }
 
 vector<Item*> Habitacion::getItems() {

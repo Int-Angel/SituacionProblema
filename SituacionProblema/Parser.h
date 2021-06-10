@@ -17,6 +17,11 @@ const char* msg3 = "Ese objeto no puede ser llevado en tu inventario.";
 const char* msg4 = "El objeto se ha agregado a tu inventario";
 const char* msg5 = "Solo puedes eliminar objetos que esten en tu inventario";
 
+
+/*
+	Clase parser que se encarga de prosesar  y ejecutar los comandos ingresados por el usuario
+	para esto utiliza la clase ListaPalabras para obtener los comandos.
+*/
 class Parser
 {
 public:

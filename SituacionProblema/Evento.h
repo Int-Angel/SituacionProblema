@@ -5,7 +5,7 @@ class Evento
 public:
 	Evento(string, int, string, string);
 	bool Ejecutar(int, Personaje*);
-	void test();
+	void test(); // Metodo para ver que le evento este bien 
 	string toLower(string str);
 private:
 	string descripcion;
@@ -22,9 +22,9 @@ Evento::Evento(string desc, int n, string hab, string nom) {
 }
 
 bool Evento::Ejecutar(int n, Personaje* personaje) {
-	if (n >= nAcciones && toLower(personaje->getHabitacion()->getNombre()) == toLower(habitacion)) {
-		if (nombreItem == "none" || (nombreItem != "none" && personaje->checkIfItemExists(nombreItem))) {
-			cout << endl<<descripcion << endl;
+	if (n >= nAcciones && toLower(personaje->getHabitacion()->getNombre()) == toLower(habitacion)) { // checamos numero de acciones realizadas y la habitacion actual
+		if (nombreItem == "none" || (nombreItem != "none" && personaje->checkIfItemExists(nombreItem))) { // cehcamos que el jugador tenga el item correspondiednte para poder seguir
+			cout << endl<<descripcion << endl; // ejecutamos el evento
 			return true;
 		}
 	}
@@ -44,6 +44,7 @@ string Evento::toLower(string str) {
 	}
 	return res;
 }
+
 /*
 txt:
 #Descripcion del evento

@@ -6,6 +6,12 @@
 #include "ItemPickable.h"
 using namespace std;
 
+/*
+	Clase Personaje es la clase del juagdor:
+		- contiene un inventario
+		- se puede desplazar en el mapa
+
+*/
 class Personaje
 {
 public:

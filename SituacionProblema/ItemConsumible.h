@@ -1,6 +1,10 @@
 #pragma once
 #include "Item.h"
 #include "ItemPickable.h"
+
+/*
+	clase usada para items que puedes agregar al inventario, pero puedes consumir por lo que tienen un uso limitado
+*/
 class ItemConsumible: public ItemPickable
 {
 public:
@@ -19,7 +23,6 @@ ItemConsumible::ItemConsumible(string desc_, string nombre_, vector<string> pala
 }
 
 string ItemConsumible::interactuar() {
-	//return inventario ? accion : "Agregado al inventario";
 	if (cantidad == 0)
 		return "Ya no puedes consumir este item, te lo has acabado";
 

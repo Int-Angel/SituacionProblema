@@ -1,6 +1,10 @@
 #pragma once
 #include "ItemPickable.h"
 #include "Item.h"
+
+/*
+	Clase usada para items staticos que no se pueden agregar al inventario como la lampara o la mesa.
+*/
 class ItemStatic: public Item
 {
 public:
