@@ -51,8 +51,13 @@ void Personaje::setHabitacionActual(Habitacion* hab) {
 
 void Personaje::addItem(ItemPickable* item) {
 
-	inventario.push_back(item);
-	habActual->quitarItem(item);
+	if (habActual->quitarItem(item)) {
+		inventario.push_back(item);
+	}
+	else {
+		cout << "No existe ese objeto en la habitacion para ser agregado" << endl;
+		return;
+	}
 
 	cout << endl<<"Este es tu Inventario: " << endl;
 	for (int i = 0; i < inventario.size(); ++i) {

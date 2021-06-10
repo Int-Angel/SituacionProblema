@@ -14,8 +14,7 @@ using namespace std;
 const char* msg1 = "No comprendo la instruccion. Verifique que las palabras hayan sido escritas corretamente y que el orden de ellas sea el adecuado";
 const char* msg2 = "No comprendo la instruccion. Verifique que la instruccion tecleada sea un comando";
 const char* msg3 = "Ese objeto no puede ser llevado en tu inventario.";
-const char* msg4 = "El objeto se ha agregado a tu inventario";
-const char* msg5 = "Solo puedes eliminar objetos que esten en tu inventario";
+const char* msg4 = "Solo puedes eliminar objetos que esten en tu inventario";
 
 
 /*
@@ -82,7 +81,6 @@ bool Parser::procesaComando(string instruccion) {
 	if (tipo1 == "agregar" && tipo2 == "objeto") {
 		if (ItemPickable* pickable = dynamic_cast<ItemPickable*>(item)) {
 			personaje->addItem(pickable);
-			cout << msg4 << endl;
 		}
 		else {
 			cout << msg3 << endl;
@@ -97,7 +95,7 @@ bool Parser::procesaComando(string instruccion) {
 			}
 		}
 		else {
-			cout << msg5 << endl;
+			cout << msg4 << endl;
 		}
 		return true;
 	}
